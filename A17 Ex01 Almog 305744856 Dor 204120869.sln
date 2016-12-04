@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "A17_Ex01_UI", "A17 Ex01 Almog 305744856 Dor 204120869\A17_Ex01_UI.csproj", "{935D1225-B0A9-4998-A394-5C57F833C4DF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{935D1225-B0A9-4998-A394-5C57F833C4DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{935D1225-B0A9-4998-A394-5C57F833C4DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{935D1225-B0A9-4998-A394-5C57F833C4DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{935D1225-B0A9-4998-A394-5C57F833C4DF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
