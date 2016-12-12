@@ -34,10 +34,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Facebook">
-      <HintPath>..\..\..\..\..\..\Desktop\01_FB01_BasicFacebookFeatures.V6.8.0.15\FBApi\Facebook.dll</HintPath>
+      <HintPath>..\..\..\..\Desktop\DP\01_FB01_BasicFacebookFeatures.V6.8.0.15\FBApi\Facebook.dll</HintPath>
     </Reference>
     <Reference Include="FbGraphApiWrapper">
-      <HintPath>..\..\..\..\..\..\Desktop\01_FB01_BasicFacebookFeatures.V6.8.0.15\FBApi\FbGraphApiWrapper.dll</HintPath>
+      <HintPath>..\..\..\..\Desktop\DP\01_FB01_BasicFacebookFeatures.V6.8.0.15\FBApi\FbGraphApiWrapper.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -67,6 +67,7 @@
     <Compile Include="listViewPhotoDisplay\MouseDoubleClick.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="AppSettings.cs" />
     <Compile Include="UserWithPhotos.cs" />
     <EmbeddedResource Include="AppHomepage.resx">
       <DependentUpon>AppHomepage.cs</DependentUpon>

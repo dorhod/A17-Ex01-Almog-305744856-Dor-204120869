@@ -11,6 +11,9 @@ using Facebook;
 using FacebookWrapper;
 using FacebookWrapper.ObjectModel;
 using System.Collections;
+using System.IO;
+using System.Xml.Serialization;
+using System.Xml;
 
 namespace A17_Ex01_UI
 {
@@ -21,58 +24,96 @@ namespace A17_Ex01_UI
             InitializeComponent();
         }
 
+        protected override void OnLoad(EventArgs e)
+        {
+            XmlSerializer ser = new XmlSerializer(typeof(AppSettings));
+            using (XmlReader reader = XmlReader.Create(@"UserSetting.xml"))
+            {
+                m_Settings = (AppSettings)ser.Deserialize(reader);
+            }
+            
+
+            if(m_Settings.m_lastAccessToken != null)
+            {
+                LoginResult result = FacebookService.Connect(m_Settings.m_lastAccessToken);
+                CheckLoginResult(result);
+            }
+
+
+            base.OnLoad(e);
+        }
+        
+        protected override void OnClosing(CancelEventArgs e)
+        {
+
+            m_Settings.Save();
+            base.OnClosing(e);
+
+        }
+
         User m_LoggedInUser;
         List<Photo> m_photoList = new List<Photo>();
         List<User> m_TagsWith = new List<User>();
         List<Photo> m_25photosList;
         List<Photo> m_photosCheckedByUser;
         List<UserWithPhotos> m_PhotosByUserList = new List<UserWithPhotos>();
-
+        AppSettings m_Settings = new AppSettings();
         private void loginToUser()
         {
-            LoginResult result = FacebookService.Login("596174253921671",
-                "public_profile",
-                "user_education_history",
-                "user_birthday",
-                "user_actions.video",
-                "user_actions.news",
-                "user_actions.music",
-                "user_actions.fitness",
-                "user_actions.books",
-                "user_about_me",
-                "user_friends",
-                "publish_actions",
-                "user_events",
-                "user_games_activity",
-                "user_hometown",
-                "user_likes",
-                "user_location",
-                "user_managed_groups",
-                "user_photos",
-                "user_posts",
-                "user_relationships",
-                "user_relationship_details",
-                "user_religion_politics",
-                "user_tagged_places",
-                "user_videos",
-                "user_website",
-                "user_work_history",
-                "read_custom_friendlists",
-                "read_page_mailboxes",
-                "manage_pages",
-                "publish_pages",
-                "publish_actions",
-                "rsvp_event"
-                );
-
-            if (!string.IsNullOrEmpty(result.AccessToken))
+            if (m_LoggedInUser == null)
             {
-                m_LoggedInUser = result.LoggedInUser;
+                LoginResult result = FacebookService.Login("596174253921671",
+                    "public_profile",
+                    "user_education_history",
+                    "user_birthday",
+                    "user_actions.video",
+                    "user_actions.news",
+                    "user_actions.music",
+                    "user_actions.fitness",
+                    "user_actions.books",
+                    "user_about_me",
+                    "user_friends",
+                    "publish_actions",
+                    "user_events",
+                    "user_games_activity",
+                    "user_hometown",
+                    "user_likes",
+                    "user_location",
+                    "user_managed_groups",
+                    "user_photos",
+                    "user_posts",
+                    "user_relationships",
+                    "user_relationship_details",
+                    "user_religion_politics",
+                    "user_tagged_places",
+                    "user_videos",
+                    "user_website",
+                    "user_work_history",
+                    "read_custom_friendlists",
+                    "read_page_mailboxes",
+                    "manage_pages",
+                    "publish_pages",
+                    "publish_actions",
+                    "rsvp_event"
+                    );
+
+                CheckLoginResult(result);
+            }
+            
+        }
+
+        private void CheckLoginResult(LoginResult loginResult)
+        {
+            if (!string.IsNullOrEmpty(loginResult.AccessToken))
+            {
+                m_LoggedInUser = loginResult.LoggedInUser;
+                m_Settings.m_lastAccessToken = loginResult.AccessToken;
+                buttonLogin.Text = "Logout";
                 fetchUserInfo();
             }
             else
             {
-                MessageBox.Show(result.ErrorMessage);
+                MessageBox.Show(loginResult.ErrorMessage);
             }
         }
 
@@ -171,7 +212,6 @@ namespace A17_Ex01_UI
             if (m_LoggedInUser == null)
             {
                 loginToUser();
-                buttonLogin.Text = "Logout";
             }
             else
             {
@@ -248,9 +288,9 @@ namespace A17_Ex01_UI
         private void buttonOpenSelectedPhoto_Click(object sender, EventArgs e)
         {
             Console.WriteLine(listViewPhotoDisplay.SelectedIndices[0]);
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new ImageReaction());
+            //Application.EnableVisualStyles();
+            //Application.SetCompatibleTextRenderingDefault(false);
+            //Application.Run(new ImageReaction());
         }
     }
 }
