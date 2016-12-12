@@ -69,6 +69,7 @@ namespace A17_Ex01_UI
             {
                 m_LoggedInUser = result.LoggedInUser;
                 fetchUserInfo();
+
             }
             else
             {
