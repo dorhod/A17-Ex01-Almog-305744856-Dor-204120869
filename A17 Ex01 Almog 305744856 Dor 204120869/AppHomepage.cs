@@ -27,6 +27,8 @@ namespace A17_Ex01_UI
         List<Photo> m_25photosList;
         List<Photo> m_photosCheckedByUser;
         List<UserWithPhotos> m_PhotosByUserList = new List<UserWithPhotos>();
+        List<Photo> m_photosToReactOn = new List<Photo>();
+        string m_AccessToken;
 
         private void loginToUser()
         {
@@ -67,6 +69,7 @@ namespace A17_Ex01_UI
 
             if (!string.IsNullOrEmpty(result.AccessToken))
             {
+                m_AccessToken = result.AccessToken;
                 m_LoggedInUser = result.LoggedInUser;
                 fetchUserInfo();
             }
@@ -107,7 +110,7 @@ namespace A17_Ex01_UI
             foreach (Photo photo in photolist)
             {
                 imageListFromUser.Images.Add(photo.ImageNormal);
-
+                m_photosToReactOn.Add(photo);
             }
 
             listViewPhotoDisplay.View = View.LargeIcon;
@@ -248,9 +251,9 @@ namespace A17_Ex01_UI
         private void buttonOpenSelectedPhoto_Click(object sender, EventArgs e)
         {
             Console.WriteLine(listViewPhotoDisplay.SelectedIndices[0]);
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new ImageReaction());
+
+            ImageReaction newImageReaction = new ImageReaction(m_photosToReactOn.ElementAt(listViewPhotoDisplay.SelectedIndices[0]), m_AccessToken);
+            newImageReaction.Show();
         }
     }
 }
