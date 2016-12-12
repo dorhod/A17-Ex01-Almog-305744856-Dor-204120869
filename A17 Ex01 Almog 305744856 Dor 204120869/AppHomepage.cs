@@ -58,6 +58,7 @@ namespace A17_Ex01_UI
         List<Photo> m_photosCheckedByUser;
         List<UserWithPhotos> m_PhotosByUserList = new List<UserWithPhotos>();
         AppSettings m_Settings = new AppSettings();
+
         private void loginToUser()
         {
             if (m_LoggedInUser == null)
