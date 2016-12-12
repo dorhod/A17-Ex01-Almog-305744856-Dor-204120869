@@ -110,6 +110,7 @@ namespace A17_Ex01_UI
                 m_Settings.m_lastAccessToken = loginResult.AccessToken;
                 buttonLogin.Text = "Logout";
                 fetchUserInfo();
+
             }
             else
             {
