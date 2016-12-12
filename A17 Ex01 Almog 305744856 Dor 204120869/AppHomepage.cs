@@ -14,9 +14,9 @@ using System.Collections;
 
 namespace A17_Ex01_UI
 {
-    public partial class Form1 : Form
+    public partial class AppHomepage : Form
     {
-        public Form1()
+        public AppHomepage()
         {
             InitializeComponent();
         }
@@ -107,11 +107,12 @@ namespace A17_Ex01_UI
             foreach (Photo photo in photolist)
             {
                 imageListFromUser.Images.Add(photo.ImageNormal);
+
             }
 
             listViewPhotoDisplay.View = View.LargeIcon;
             listViewPhotoDisplay.LargeImageList = imageListFromUser;
-
+            
             for (int j = 0; j < this.imageListFromUser.Images.Count; j++)
             {
                 ListViewItem item = new ListViewItem();
@@ -157,15 +158,13 @@ namespace A17_Ex01_UI
             int indexOfTaggedUser = 0;
             foreach (UserWithPhotos taggedUser in this.m_PhotosByUserList)
             {
-                if (taggedUser.GetTaggedUser().Name.Equals(nameOfUser))
+                if (taggedUser.m_TaggedUser.Name.Equals(nameOfUser))
                     return indexOfTaggedUser;
                 indexOfTaggedUser++;
             }
 
             return -1;
         }
-
-
 
         private void buttonLogin_Click(object sender, EventArgs e)
         {
@@ -181,29 +180,20 @@ namespace A17_Ex01_UI
             }
         }
 
-        private void pictureBoxProfilPicture_Click_1(object sender, EventArgs e)
-        {
-
-        }
-
-        private void checkBoxUserTaggedWith_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void buttonSearchPhotos_Click(object sender, EventArgs e)
         {
             m_photosCheckedByUser = new List<Photo>();
             listViewPhotoDisplay.Clear();
             imageListFromUser.Dispose();
             Boolean b_FirstCheck = true;
+
             foreach (UserWithPhotos taggedUser in m_PhotosByUserList)
             {
-                if (checkBoxUserTaggedWith.CheckedItems.Contains(taggedUser.GetTaggedUser().Name))
+                if (checkBoxUserTaggedWith.CheckedItems.Contains(taggedUser.m_TaggedUser.Name))
                 {
                     if (b_FirstCheck)
                     {
-                        foreach (Photo photo in taggedUser.GetPhotosOfUser())
+                        foreach (Photo photo in taggedUser.m_PhotosOfUser)
                         {
                             if (!m_photosCheckedByUser.Contains(photo))
                             {
@@ -230,9 +220,37 @@ namespace A17_Ex01_UI
             showPhotos(m_photosCheckedByUser);
         }
 
+        private void pictureBoxProfilPicture_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void checkBoxUserTaggedWith_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
         private void listViewPhotoDisplay_SelectedIndexChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void pictureBoxColoredBlockTop_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void buttonRandomPhoto_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void buttonOpenSelectedPhoto_Click(object sender, EventArgs e)
+        {
+            Console.WriteLine(listViewPhotoDisplay.SelectedIndices[0]);
+            Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault(false);
+            Application.Run(new ImageReaction());
         }
     }
 }

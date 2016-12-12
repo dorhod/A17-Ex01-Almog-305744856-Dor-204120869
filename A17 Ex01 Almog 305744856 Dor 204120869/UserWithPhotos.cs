@@ -11,8 +11,8 @@ namespace A17_Ex01_UI
 {
     class UserWithPhotos
     {
-        private List<Photo> m_PhotosOfUser;
-        private User m_TaggedUser;
+        public List<Photo> m_PhotosOfUser { get; set; }
+        public User m_TaggedUser { get; set; }
 
         public UserWithPhotos(User taggedUser, Photo photoOfUser)
         {
@@ -21,15 +21,6 @@ namespace A17_Ex01_UI
             m_PhotosOfUser.Add(photoOfUser);
         }
 
-        public User GetTaggedUser()
-        {
-            return this.m_TaggedUser;
-        }
-
-        public List<Photo> GetPhotosOfUser()
-        {
-            return this.m_PhotosOfUser;
-        }
 
         public void AddPhotoToUser(Photo i_photo)
         {

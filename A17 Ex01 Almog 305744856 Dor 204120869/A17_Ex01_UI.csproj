@@ -52,17 +52,27 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Form1.cs">
+    <Compile Include="AppHomepage.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="AppHomepage.Designer.cs">
+      <DependentUpon>AppHomepage.cs</DependentUpon>
     </Compile>
+    <Compile Include="ImageReaction.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ImageReaction.Designer.cs">
+      <DependentUpon>ImageReaction.cs</DependentUpon>
+    </Compile>
+    <Compile Include="listViewPhotoDisplay\MouseDoubleClick.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UserWithPhotos.cs" />
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <EmbeddedResource Include="AppHomepage.resx">
+      <DependentUpon>AppHomepage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ImageReaction.resx">
+      <DependentUpon>ImageReaction.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -86,6 +96,15 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\fb_icon_325x325.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\images.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Top.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
