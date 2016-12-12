@@ -121,6 +121,7 @@ namespace A17_Ex01_UI
         {
             pictureBoxProfilPicture.LoadAsync(m_LoggedInUser.PictureNormalURL);
             fetchAlltaggedPictures();
+
         }
 
         private void fetchAlltaggedPictures()
