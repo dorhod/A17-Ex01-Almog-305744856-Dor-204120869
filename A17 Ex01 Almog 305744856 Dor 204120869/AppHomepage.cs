@@ -26,19 +26,24 @@ namespace A17_Ex01_UI
 
         protected override void OnLoad(EventArgs e)
         {
-            XmlSerializer ser = new XmlSerializer(typeof(AppSettings));
-            using (XmlReader reader = XmlReader.Create(@"UserSetting.xml"))
+            try
             {
-                m_Settings = (AppSettings)ser.Deserialize(reader);
-            }
-            
+                XmlSerializer ser = new XmlSerializer(typeof(AppSettings));
+                using (XmlReader reader = XmlReader.Create(@"UserSetting.xml"))
+                {
+                    m_Settings = (AppSettings)ser.Deserialize(reader);
+                }
 
-            if(m_Settings.m_lastAccessToken != null)
+
+                if (m_Settings.m_lastAccessToken != null)
+                {
+                    LoginResult result = FacebookService.Connect(m_Settings.m_lastAccessToken);
+                    CheckLoginResult(result);
+                }
+            } catch(Exception ex)
             {
-                LoginResult result = FacebookService.Connect(m_Settings.m_lastAccessToken);
-                CheckLoginResult(result);
-            }
 
+            }
 
             base.OnLoad(e);
         }
@@ -95,6 +100,7 @@ namespace A17_Ex01_UI
                     "read_custom_friendlists",
                     "read_page_mailboxes",
                     "manage_pages",
+                    "pages_show_list",
                     "publish_pages",
                     "publish_actions",
                     "rsvp_event"
