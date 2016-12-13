@@ -14,6 +14,8 @@ using System.Collections;
 using System.IO;
 using System.Xml.Serialization;
 using System.Xml;
+using System.Dynamic;
+using System.Net;
 
 namespace A17_Ex01_UI
 {
@@ -64,7 +66,7 @@ namespace A17_Ex01_UI
         List<UserWithPhotos> m_PhotosByUserList = new List<UserWithPhotos>();
         AppSettings m_Settings = new AppSettings();
         List<Photo> m_photosToReactOn = new List<Photo>();
-        string m_AccessToken;
+        FacebookOAuthResult m_OAuthResult;
 
         private void loginToUser()
         {
@@ -105,7 +107,6 @@ namespace A17_Ex01_UI
                     "publish_actions",
                     "rsvp_event"
                     );
-
                 CheckLoginResult(result);
             }
             
@@ -293,6 +294,9 @@ namespace A17_Ex01_UI
 
         private void buttonRandomPhoto_Click(object sender, EventArgs e)
         {
+           FacebookClient fbUser = new FacebookClient(m_Settings.m_lastAccessToken);
+            //Status postid = m_LoggedInUser.PostStatus("Test2");
+            //Comment comment =  postid.Comment("Lets test likes");
 
         }
 
@@ -300,8 +304,12 @@ namespace A17_Ex01_UI
         {
             Console.WriteLine(listViewPhotoDisplay.SelectedIndices[0]);
 
-            ImageReaction newImageReaction = new ImageReaction(m_photosToReactOn.ElementAt(listViewPhotoDisplay.SelectedIndices[0]), m_AccessToken);
-            newImageReaction.Show();
+            UserFeed userFeed = new UserFeed(m_Settings);
+            userFeed.Show();
+
+            //ImageReaction newImageReaction = new ImageReaction(m_photosToReactOn.ElementAt(listViewPhotoDisplay.SelectedIndices[0]), m_Settings);
+            //newImageReaction.Show();
         }
+        
     }
 }

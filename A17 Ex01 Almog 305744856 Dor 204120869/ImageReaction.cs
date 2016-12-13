@@ -10,26 +10,39 @@ using System.Windows.Forms;
 using Facebook;
 using FacebookWrapper;
 using FacebookWrapper.ObjectModel;
+using System.Dynamic;
 
 namespace A17_Ex01_UI
 {
     public partial class ImageReaction : Form
     {
         private Photo m_CurrentPicture;
-        private string m_AccessToken;
         FacebookClient fbUser;
 
-        public ImageReaction(Photo i_SelectedPhotoFromUser, string i_AccessToken)
+        public ImageReaction(Photo i_SelectedPhotoFromUser, AppSettings i_Settings)
         {
             InitializeComponent();
             m_CurrentPicture = i_SelectedPhotoFromUser;
-            m_AccessToken = i_AccessToken;
-            fbUser = new FacebookClient(m_AccessToken);
+            fbUser = new FacebookClient(i_Settings.m_lastAccessToken);
         }
 
         private void buttonLike_Click(object sender, EventArgs e)
         {
-            m_CurrentPicture.Like();
+
+            dynamic parameters = new ExpandoObject(); parameters.idobject = "";
+
+           // dynamic result = fbUser.Post("/me/feed", parameters);
+
+
+            fbUser.Post("/" + m_CurrentPicture.Id + "/likes", fbUser.AccessToken);
+            try
+            {
+                m_CurrentPicture.Like();
+            }
+            catch (Exception E)
+            {
+                m_CurrentPicture.Unlike();
+            }
         }
 
         private void buttonComment_Click(object sender, EventArgs e)
