@@ -58,13 +58,24 @@
     <Compile Include="AppHomepage.Designer.cs">
       <DependentUpon>AppHomepage.cs</DependentUpon>
     </Compile>
+    <Compile Include="FilterFeed.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="FilterFeed.Designer.cs">
+      <DependentUpon>FilterFeed.cs</DependentUpon>
+    </Compile>
     <Compile Include="ImageReaction.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="ImageReaction.Designer.cs">
       <DependentUpon>ImageReaction.cs</DependentUpon>
     </Compile>
-    <Compile Include="listViewPhotoDisplay\MouseDoubleClick.cs" />
+    <Compile Include="ImageSearcher.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ImageSearcher.Designer.cs">
+      <DependentUpon>ImageSearcher.cs</DependentUpon>
+    </Compile>
     <Compile Include="PhotoPost.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -90,8 +101,14 @@
     <EmbeddedResource Include="AppHomepage.resx">
       <DependentUpon>AppHomepage.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FilterFeed.resx">
+      <DependentUpon>FilterFeed.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ImageReaction.resx">
       <DependentUpon>ImageReaction.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ImageSearcher.resx">
+      <DependentUpon>ImageSearcher.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PhotoPost.resx">
       <DependentUpon>PhotoPost.cs</DependentUpon>
