@@ -13,14 +13,16 @@ namespace A17_Ex01_UI
 {
     public partial class ImageSearcher : UserControl
     {
-        List<Photo> m_photoList = new List<Photo>();
+        List<Photo> m_AllPhotosList = new List<Photo>();
         List<User> m_TagsWith = new List<User>();
         List<Photo> m_25photosList;
         List<Photo> m_photosCheckedByUser;
         List<UserWithPhotos> m_PhotosByUserList = new List<UserWithPhotos>();
-        AppSettings m_Settings;
+        Dictionary<int, List<Photo>> m_PhotosByYearList = new Dictionary<int, List<Photo>>(); 
         List<Photo> m_photosToReactOn = new List<Photo>();
+        Boolean b_FirstCheck = true;
         User m_LoggedInUser;
+        AppSettings m_Settings;
 
         public ImageSearcher(AppSettings i_Settings, User i_LoggedUser)
         {
@@ -31,25 +33,70 @@ namespace A17_Ex01_UI
 
         }
 
-
-        private void buttonOpenSelectedPhoto_Click(object sender, EventArgs e)
-        { 
-          //  ImageReaction newImageReaction = new ImageReaction(m_photosToReactOn.ElementAt(listViewPhotoDisplay.SelectedIndices[0]), m_Settings);
-           // newImageReaction.Show();
-        }
-
         private void buttonSearchPhotos_Click(object sender, EventArgs e)
         {
             m_photosCheckedByUser = new List<Photo>();
             listViewPhotoDisplay.Clear();
             imageListFromUser.Dispose();
-            Boolean b_FirstCheck = true;
+
+            FilterPhotosByUserName();
+            FilterPhotosByYear();
+
+            showPhotos(m_photosCheckedByUser);
+        }
+
+        private void FilterPhotosByYear()
+        {
+            foreach (int year in m_PhotosByYearList.Keys)
+            {
+                if (checkedListBoxYearOfPhoto.CheckedItems.Count > 1)
+                {
+                    m_photosCheckedByUser.Clear();
+                } 
+                             
+                else if (checkedListBoxYearOfPhoto.CheckedItems.Contains(year))
+                {
+                    if (b_FirstCheck == true)
+                    {
+                        foreach (Photo photo in m_PhotosByYearList[year])
+                        {
+                            if (!m_photosCheckedByUser.Contains(photo))
+                            {
+                                m_photosCheckedByUser.Add(photo);
+                            }
+                        }
+                        b_FirstCheck = false;
+                    }
+
+                    else
+                    {
+                        List<Photo> photosToDelete = new List<Photo>();
+                        foreach (Photo photo in m_photosCheckedByUser)
+                        {
+                            if (photo.CreatedTime.GetValueOrDefault().Year != year)
+                            {
+                                photosToDelete.Add(photo);
+                            }
+                        }
+                        foreach (Photo photo in photosToDelete)
+                        {
+                            m_photosCheckedByUser.Remove(photo);
+                        }
+                    }  
+                }
+            }
+        }
+
+        private void FilterPhotosByUserName()
+        {
+            b_FirstCheck = true;
 
             foreach (UserWithPhotos taggedUser in m_PhotosByUserList)
             {
                 if (checkBoxUserTaggedWith.CheckedItems.Contains(taggedUser.m_TaggedUser.Name))
                 {
-                    if (b_FirstCheck)
+                    
+                    if (b_FirstCheck == true)
                     {
                         foreach (Photo photo in taggedUser.m_PhotosOfUser)
                         {
@@ -65,7 +112,7 @@ namespace A17_Ex01_UI
                         List<Photo> newPhotoCheckedByUser = new List<Photo>();
                         foreach (Photo photo in m_photosCheckedByUser)
                         {
-                            if (taggedUser.IsPhotoExist(photo))
+                            if (taggedUser.IsPhotoExist(photo) == true)
                             {
                                 newPhotoCheckedByUser.Add(photo);
                             }
@@ -73,9 +120,8 @@ namespace A17_Ex01_UI
                         m_photosCheckedByUser = newPhotoCheckedByUser;
                     }
                 }
-            }
 
-            showPhotos(m_photosCheckedByUser);
+            }
         }
 
         private void fetchAlltaggedPictures()
@@ -91,7 +137,7 @@ namespace A17_Ex01_UI
             m_25photosList = new List<Photo>();
             for (int i = 1; i < 5; i++)
             {
-                m_25photosList.Add(m_photoList[i]);
+                m_25photosList.Add(m_AllPhotosList[i]);
 
             }
 
@@ -122,10 +168,21 @@ namespace A17_Ex01_UI
         {
             string taggedUserName;
             int IndexOfTaggedUser;
+            int yearOfPhoto;
             foreach (Photo photo in photos)
             {
-                m_photoList.Add(photo);
+                m_AllPhotosList.Add(photo);
                 FacebookObjectCollection<PhotoTag> photoTags = photo.Tags;
+
+                // Create a list of years that has photos
+                yearOfPhoto = photo.CreatedTime.GetValueOrDefault().Year;
+                if (!m_PhotosByYearList.ContainsKey(yearOfPhoto))
+                {
+                    m_PhotosByYearList.Add(yearOfPhoto, new List<Photo>());
+                    checkedListBoxYearOfPhoto.Items.Add(yearOfPhoto);
+                }
+
+                // Create a list of users and the photos their tagged in
                 if (photo.Tags != null)
                 {
                     foreach (PhotoTag photoTag in photoTags)
@@ -140,6 +197,8 @@ namespace A17_Ex01_UI
                         {
                             this.m_PhotosByUserList.Add(new UserWithPhotos(photoTag.User, photo));
                         }
+
+                        // Add all tagged names to check box list
                         if (!checkBoxUserTaggedWith.Items.Contains(taggedUserName))
                         {
                             m_TagsWith.Add(photoTag.User);
@@ -147,6 +206,12 @@ namespace A17_Ex01_UI
                         }
                     }
                 }
+            }
+
+            foreach (Photo photo in m_AllPhotosList)
+            {
+                // Create a list of photos by the year they were added
+                m_PhotosByYearList[photo.CreatedTime.GetValueOrDefault().Year].Add(photo);
             }
         }
 
@@ -163,10 +228,16 @@ namespace A17_Ex01_UI
             return -1;
         }
 
-        private void buttonOpenSelectedPhoto_Click_1(object sender, EventArgs e)
+        private void buttonOpenSelectedPhoto_Click(object sender, EventArgs e)
         {
             ImageReaction newImageReaction = new ImageReaction(m_photosToReactOn.ElementAt(listViewPhotoDisplay.SelectedIndices[0]), m_Settings);
             newImageReaction.Show();
         }
+
+        private void checkBoxUserTaggedWith_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
     }
 }

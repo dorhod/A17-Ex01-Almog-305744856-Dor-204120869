@@ -36,7 +36,7 @@ namespace A17_Ex01_UI
             Dictionary<string, object> commentDicitonay = new Dictionary<string, object>
             {
                 {"id", m_CurrentPicture.Id},
-                {"message", "Description"}
+                {"message", textBoxAddAComment.Text}
             };
 
             fbUser.Post("/comments", commentDicitonay);

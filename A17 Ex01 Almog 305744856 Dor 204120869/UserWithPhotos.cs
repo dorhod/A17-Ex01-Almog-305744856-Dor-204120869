@@ -21,7 +21,6 @@ namespace A17_Ex01_UI
             m_PhotosOfUser.Add(photoOfUser);
         }
 
-
         public void AddPhotoToUser(Photo i_photo)
         {
             if (!IsPhotoExist(i_photo))
