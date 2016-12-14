@@ -61,7 +61,6 @@ namespace A17_Ex01_UI
         List<UserWithPhotos> m_PhotosByUserList = new List<UserWithPhotos>();
         AppSettings m_Settings = new AppSettings();
         List<Photo> m_photosToReactOn = new List<Photo>();
-        FacebookOAuthResult m_OAuthResult;
 
         private void loginToUser()
         {
@@ -298,7 +297,6 @@ namespace A17_Ex01_UI
         private void buttonOpenSelectedPhoto_Click(object sender, EventArgs e)
         {
             Console.WriteLine(listViewPhotoDisplay.SelectedIndices[0]);
-
             UserFeed userFeed = new UserFeed(m_Settings);
             userFeed.Show();
 
