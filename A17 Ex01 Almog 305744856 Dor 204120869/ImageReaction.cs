@@ -53,17 +53,35 @@ namespace A17_Ex01_UI
         }
 
         private void buttonShare_Click(object sender, EventArgs e)
-        {            
-            try
+        {
+            //try
+            //{
+               // Dictionary<string, object> parameters = new Dictionary<string, object>();
+                //parameters.Add("message", textBoxAddAComment.Text);
+                //parameters.Add("link", m_CurrentPicture.Link);
+                //parameters.Add("picture", "postInfo.ImageUrl");
+                dynamic parameters = new ExpandoObject();
+                parameters.message = textBoxAddAComment.Text;
+                parameters.link = m_CurrentPicture.Link;
+                parameters.picture = "postInfo.ImageUrl";
+            
+            var tags = new[]
             {
-                //m_CurrentPicture.From.PostPhoto(m_CurrentPicture.URL);
-                fbUser.Post(m_CurrentPicture);
-            }
-            catch(Exception ex)
-            {
+               new {x = 0, y = 0, tag_uid = 10154908964634642},
+            };
+            parameters.story_tags = m_CurrentPicture.Tags;
 
-            }
+            fbUser.Post("me/feed", parameters);
+            //fbUser.Post("me/feed", parameters);
+                
+            
+           // }
+            //catch(Exception ex)
+            //{
+              //  Console.WriteLine(ex.ToString());
+           // }
         }
+
 
         private void pictureBoxSelectedPicture_Click(object sender, EventArgs e)
         {
