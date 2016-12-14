@@ -17,6 +17,8 @@ using System.Xml;
 using System.Dynamic;
 using System.Net;
 
+
+
 namespace A17_Ex01_UI
 {
     public partial class AppHomepage : Form
@@ -28,19 +30,24 @@ namespace A17_Ex01_UI
 
         protected override void OnLoad(EventArgs e)
         {
-            XmlSerializer ser = new XmlSerializer(typeof(AppSettings));
-            using (XmlReader reader = XmlReader.Create(@"UserSetting.xml"))
+            try
             {
-                m_Settings = (AppSettings)ser.Deserialize(reader);
-            }
-            
+                XmlSerializer ser = new XmlSerializer(typeof(AppSettings));
+                using (XmlReader reader = XmlReader.Create(@"UserSetting.xml"))
+                {
+                    m_Settings = (AppSettings)ser.Deserialize(reader);
+                }
 
-            if(m_Settings.m_lastAccessToken != null)
+
+                if (m_Settings.m_lastAccessToken != null)
+                {
+                    LoginResult result = FacebookService.Connect(m_Settings.m_lastAccessToken);
+                    CheckLoginResult(result);
+                }
+            } catch(Exception ex)
             {
-                LoginResult result = FacebookService.Connect(m_Settings.m_lastAccessToken);
-                CheckLoginResult(result);
-            }
 
+            }
 
             base.OnLoad(e);
         }
@@ -151,6 +158,7 @@ namespace A17_Ex01_UI
 
         private void showPhotos(List<Photo> photolist)
         {
+            m_photosToReactOn.Clear();
             foreach (Photo photo in photolist)
             {
                 imageListFromUser.Images.Add(photo.ImageNormal);
@@ -288,10 +296,11 @@ namespace A17_Ex01_UI
 
         private void buttonRandomPhoto_Click(object sender, EventArgs e)
         {
-           FacebookClient fbUser = new FacebookClient(m_Settings.m_lastAccessToken);
-            //Status postid = m_LoggedInUser.PostStatus("Test2");
+            FacebookClient fbUser = new FacebookClient(m_Settings.m_lastAccessToken);
+       
+            Post postid = m_LoggedInUser.PostPhoto(@"C:\Users\dorho\Desktop\view.jpg", "Australia");
             //Comment comment =  postid.Comment("Lets test likes");
-
+            postid.Like();
         }
 
         private void buttonOpenSelectedPhoto_Click(object sender, EventArgs e)
@@ -300,8 +309,8 @@ namespace A17_Ex01_UI
             UserFeed userFeed = new UserFeed(m_Settings);
             userFeed.Show();
 
-            //ImageReaction newImageReaction = new ImageReaction(m_photosToReactOn.ElementAt(listViewPhotoDisplay.SelectedIndices[0]), m_Settings);
-            //newImageReaction.Show();
+            ImageReaction newImageReaction = new ImageReaction(m_photosToReactOn.ElementAt(listViewPhotoDisplay.SelectedIndices[0]), m_Settings);
+            newImageReaction.Show();
         }
         
     }
