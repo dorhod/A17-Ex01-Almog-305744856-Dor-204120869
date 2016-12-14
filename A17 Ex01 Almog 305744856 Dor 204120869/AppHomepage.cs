@@ -104,6 +104,24 @@ namespace A17_Ex01_UI
         private void fetchUserInfo()
         {
             pictureBoxProfilPicture.LoadAsync(m_LoggedInUser.PictureNormalURL);
+            fetchUserFeed();
+            fetchUserPhotos();
+        }
+
+        private void fetchUserFeed()
+        {
+            TabPage tabPageFeed = new TabPage();
+            tabPageFeed.Text = "Feed";
+            tabPageFeed.Controls.Add(new FilterFeed());
+            tabControlFeatureViewer.TabPages.Add(tabPageFeed);
+        }
+
+        private void fetchUserPhotos()
+        {
+            TabPage tabPagePhotos = new TabPage();
+            tabPagePhotos.Text = "Photos";
+            tabPagePhotos.Controls.Add(new ImageSearcher(m_LoggedInUser));
+            tabControlFeatureViewer.TabPages.Add(tabPagePhotos);
         }
 
         private void buttonLogin_Click(object sender, EventArgs e)
@@ -142,14 +160,12 @@ namespace A17_Ex01_UI
 
         private void buttonFeed_Click(object sender, EventArgs e)
         {
-            FilterFeed filterFeed = new FilterFeed();
-            SwitchPanelView(filterFeed);
+
         }
 
         private void SwitchPanelView(Control i_View)
         {
-            panel_FeatureViewer.Controls.Clear();
-            panel_FeatureViewer.Controls.Add(i_View);
+ 
         }
 
         private void buttonPhotos_Click(object sender, EventArgs e)

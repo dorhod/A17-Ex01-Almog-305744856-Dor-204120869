@@ -32,15 +32,9 @@
             this.pictureBoxColoredBlockTop = new System.Windows.Forms.PictureBox();
             this.fontDialog1 = new System.Windows.Forms.FontDialog();
             this.pictureBoxProfilPicture = new System.Windows.Forms.PictureBox();
-            this.panel_FeatureViewer = new System.Windows.Forms.Panel();
-            this.buttonFeed = new System.Windows.Forms.Button();
-            this.buttonPhotos = new System.Windows.Forms.Button();
             this.tabControlFeatureViewer = new System.Windows.Forms.TabControl();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxColoredBlockTop)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxProfilPicture)).BeginInit();
-            this.tabControlFeatureViewer.SuspendLayout();
             this.SuspendLayout();
             // 
             // buttonLogin
@@ -81,62 +75,13 @@
             this.pictureBoxProfilPicture.TabStop = false;
             this.pictureBoxProfilPicture.Click += new System.EventHandler(this.pictureBoxProfilPicture_Click_1);
             // 
-            // panel_FeatureViewer
-            // 
-            this.panel_FeatureViewer.Location = new System.Drawing.Point(90, 323);
-            this.panel_FeatureViewer.Name = "panel_FeatureViewer";
-            this.panel_FeatureViewer.Size = new System.Drawing.Size(1482, 761);
-            this.panel_FeatureViewer.TabIndex = 12;
-            // 
-            // buttonFeed
-            // 
-            this.buttonFeed.Location = new System.Drawing.Point(46, 183);
-            this.buttonFeed.Name = "buttonFeed";
-            this.buttonFeed.Size = new System.Drawing.Size(231, 38);
-            this.buttonFeed.TabIndex = 13;
-            this.buttonFeed.Text = "Feed";
-            this.buttonFeed.UseVisualStyleBackColor = true;
-            this.buttonFeed.Click += new System.EventHandler(this.buttonFeed_Click);
-            // 
-            // buttonPhotos
-            // 
-            this.buttonPhotos.Location = new System.Drawing.Point(286, 183);
-            this.buttonPhotos.Name = "buttonPhotos";
-            this.buttonPhotos.Size = new System.Drawing.Size(200, 38);
-            this.buttonPhotos.TabIndex = 14;
-            this.buttonPhotos.Text = "Photos";
-            this.buttonPhotos.UseVisualStyleBackColor = true;
-            this.buttonPhotos.Click += new System.EventHandler(this.buttonPhotos_Click);
-            // 
             // tabControlFeatureViewer
             // 
-            this.tabControlFeatureViewer.Controls.Add(this.tabPage1);
-            this.tabControlFeatureViewer.Controls.Add(this.tabPage2);
-            this.tabControlFeatureViewer.Location = new System.Drawing.Point(609, 155);
+            this.tabControlFeatureViewer.Location = new System.Drawing.Point(46, 196);
             this.tabControlFeatureViewer.Name = "tabControlFeatureViewer";
             this.tabControlFeatureViewer.SelectedIndex = 0;
-            this.tabControlFeatureViewer.Size = new System.Drawing.Size(665, 573);
+            this.tabControlFeatureViewer.Size = new System.Drawing.Size(1602, 937);
             this.tabControlFeatureViewer.TabIndex = 15;
-            // 
-            // tabPage1
-            // 
-            this.tabPage1.Location = new System.Drawing.Point(8, 39);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(649, 526);
-            this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "tabPage1";
-            this.tabPage1.UseVisualStyleBackColor = true;
-            // 
-            // tabPage2
-            // 
-            this.tabPage2.Location = new System.Drawing.Point(8, 39);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(184, 53);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "tabPage2";
-            this.tabPage2.UseVisualStyleBackColor = true;
             // 
             // AppHomepage
             // 
@@ -145,9 +90,6 @@
             this.AutoSize = true;
             this.ClientSize = new System.Drawing.Size(1723, 1133);
             this.Controls.Add(this.tabControlFeatureViewer);
-            this.Controls.Add(this.buttonFeed);
-            this.Controls.Add(this.buttonPhotos);
-            this.Controls.Add(this.panel_FeatureViewer);
             this.Controls.Add(this.pictureBoxProfilPicture);
             this.Controls.Add(this.buttonLogin);
             this.Controls.Add(this.pictureBoxColoredBlockTop);
@@ -156,7 +98,6 @@
             this.Text = "Homepage";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxColoredBlockTop)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxProfilPicture)).EndInit();
-            this.tabControlFeatureViewer.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -166,12 +107,7 @@
         private System.Windows.Forms.PictureBox pictureBoxColoredBlockTop;
         private System.Windows.Forms.FontDialog fontDialog1;
         private System.Windows.Forms.PictureBox pictureBoxProfilPicture;
-        private System.Windows.Forms.Panel panel_FeatureViewer;
-        private System.Windows.Forms.Button buttonFeed;
-        private System.Windows.Forms.Button buttonPhotos;
         private System.Windows.Forms.TabControl tabControlFeatureViewer;
-        private System.Windows.Forms.TabPage tabPage1;
-        private System.Windows.Forms.TabPage tabPage2;
     }
 }
 
