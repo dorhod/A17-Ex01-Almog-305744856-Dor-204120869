@@ -306,13 +306,16 @@ namespace A17_Ex01_UI
 
         private void buttonOpenSelectedPhoto_Click(object sender, EventArgs e)
         {
-            Console.WriteLine(listViewPhotoDisplay.SelectedIndices[0] + "my photo index");
-
-      //      UserFeed userFeed = new UserFeed(m_Settings);
-      //      userFeed.Show();
-
-            ImageReaction newImageReaction = new ImageReaction(m_photosToReactOn.ElementAt(listViewPhotoDisplay.SelectedIndices[0]), m_Settings);
-            newImageReaction.Show();
+            try
+            {
+                Console.WriteLine(listViewPhotoDisplay.SelectedIndices[0] + "my photo index");
+                ImageReaction newImageReaction = new ImageReaction(m_photosToReactOn.ElementAt(listViewPhotoDisplay.SelectedIndices[0]), m_Settings);
+                newImageReaction.Show();
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine("Select Button exeption: " + ex);
+            }
         }
         
     }
