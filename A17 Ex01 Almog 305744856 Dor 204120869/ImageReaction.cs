@@ -1,11 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Facebook;
 using FacebookWrapper;
@@ -19,11 +13,11 @@ namespace A17_Ex01_UI
         private Photo m_CurrentPicture;
         FacebookClient fbUser;
 
-        public ImageReaction(Photo i_SelectedPhotoFromUser, AppSettings i_Settings)
+        public ImageReaction(Photo i_SelectedPhotoFromUser)
         {
             InitializeComponent();
             m_CurrentPicture = i_SelectedPhotoFromUser;
-            fbUser = new FacebookClient(i_Settings.m_lastAccessToken);
+            fbUser = new FacebookClient(AppSettings.GetSettings().m_lastAccessToken);
         }
 
         private void buttonLike_Click(object sender, EventArgs e)
@@ -36,7 +30,7 @@ namespace A17_Ex01_UI
             Dictionary<string, object> commentDicitonay = new Dictionary<string, object>
             {
                 {"id", m_CurrentPicture.Id},
-                {"message", "Description"}
+                {"message", textBoxAddAComment.Text}
             };
 
             fbUser.Post("/comments", commentDicitonay);

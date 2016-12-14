@@ -1,21 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Facebook;
 using FacebookWrapper;
 using FacebookWrapper.ObjectModel;
-using System.Collections;
-using System.IO;
 using System.Xml.Serialization;
 using System.Xml;
-using System.Dynamic;
-using System.Net;
 
 
 
@@ -30,38 +20,26 @@ namespace A17_Ex01_UI
 
         protected override void OnLoad(EventArgs e)
         {
-            try
+            AppSettings Settings = AppSettings.LoadToFile();
+
+            if(AppSettings.GetSettings().m_lastAccessToken != null)
             {
-                XmlSerializer ser = new XmlSerializer(typeof(AppSettings));
-                using (XmlReader reader = XmlReader.Create(@"UserSetting.xml"))
-                {
-                    m_Settings = (AppSettings)ser.Deserialize(reader);
-                }
-
-
-                if (m_Settings.m_lastAccessToken != null)
-                {
-                    LoginResult result = FacebookService.Connect(m_Settings.m_lastAccessToken);
-                    CheckLoginResult(result);
-                }
-            } catch(Exception exp)
-            {
-
+                LoginResult result = FacebookService.Connect(AppSettings.GetSettings().m_lastAccessToken);
+                m_LoggedInUser = result.LoggedInUser;
+                fetchUserInfo();
+                buttonLogin.Text = "Logout";
             }
-
             base.OnLoad(e);
         }
         
         protected override void OnClosing(CancelEventArgs e)
         {
-
-            m_Settings.Save();
+            AppSettings.SaveToFile();
             base.OnClosing(e);
 
         }
 
         User m_LoggedInUser;
-        AppSettings m_Settings = new AppSettings();
         
         private void loginToUser()
         {
@@ -112,7 +90,7 @@ namespace A17_Ex01_UI
             if (!string.IsNullOrEmpty(loginResult.AccessToken))
             {
                 m_LoggedInUser = loginResult.LoggedInUser;
-                m_Settings.m_lastAccessToken = loginResult.AccessToken;
+                AppSettings.GetSettings().m_lastAccessToken = loginResult.AccessToken;
                 buttonLogin.Text = "Logout";
                 fetchUserInfo();
 
@@ -164,7 +142,7 @@ namespace A17_Ex01_UI
 
         private void buttonFeed_Click(object sender, EventArgs e)
         {
-            FilterFeed filterFeed = new FilterFeed(m_Settings);
+            FilterFeed filterFeed = new FilterFeed();
             SwitchPanelView(filterFeed);
         }
 
@@ -176,7 +154,7 @@ namespace A17_Ex01_UI
 
         private void buttonPhotos_Click(object sender, EventArgs e)
         {
-            ImageSearcher imageSearcher = new ImageSearcher(m_Settings, m_LoggedInUser);
+            ImageSearcher imageSearcher = new ImageSearcher(m_LoggedInUser);
             SwitchPanelView(imageSearcher);
         }
     }

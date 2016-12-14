@@ -33,12 +33,14 @@
             // 
             // flowLayoutPanel
             // 
+            this.flowLayoutPanel.AllowDrop = true;
             this.flowLayoutPanel.AutoScroll = true;
+            this.flowLayoutPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.flowLayoutPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flowLayoutPanel.Location = new System.Drawing.Point(0, 0);
             this.flowLayoutPanel.Name = "flowLayoutPanel";
-            this.flowLayoutPanel.Size = new System.Drawing.Size(1333, 969);
-            this.flowLayoutPanel.TabIndex = 1;
+            this.flowLayoutPanel.Size = new System.Drawing.Size(1460, 889);
+            this.flowLayoutPanel.TabIndex = 0;
             // 
             // FilterFeed
             // 
@@ -46,7 +48,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.flowLayoutPanel);
             this.Name = "FilterFeed";
-            this.Size = new System.Drawing.Size(1333, 969);
+            this.Size = new System.Drawing.Size(1460, 889);
             this.ResumeLayout(false);
 
         }

@@ -6,29 +6,49 @@ using System.Threading.Tasks;
 using System.Collections;
 using System.IO;
 using System.Xml.Serialization;
+using System.Xml;
 
 namespace A17_Ex01_UI
 {
-     public class AppSettings
+    public class AppSettings
     {
         public string m_lastAccessToken { get; set; }
+        private static AppSettings Settings = LoadToFile();
 
-        public void Save()
+        public static AppSettings GetSettings()
         {
-            try
+            if(Settings == null)
             {
-                XmlSerializer SerializerObj = new XmlSerializer(this.GetType());
+                Settings = new AppSettings();
+            }
 
-                // Create a new file stream to write the serialized object to a file
-                TextWriter WriteFileStream = new StreamWriter(@"UserSetting.xml");
-                SerializerObj.Serialize(WriteFileStream, this);
+            return Settings;
+        }
 
+        public static void SaveToFile()
+        {
+            XmlSerializer SerializerObj = new XmlSerializer(Settings.GetType());
+            using (FileStream WriteFileStream = new FileStream(@"UserSetting.xml", FileMode.Create))
+            {
+                SerializerObj.Serialize(WriteFileStream, Settings);
                 // Cleanup
                 WriteFileStream.Close();
             }
-            catch (Exception expt)
+        }
+
+        public static AppSettings LoadToFile()
+        {
+            XmlSerializer ser = new XmlSerializer(typeof(AppSettings));
+            using (FileStream reader = new FileStream(@"UserSetting.xml", FileMode.Open))
             {
-                Console.WriteLine(expt.ToString());
+                try
+                {
+                    return (AppSettings)ser.Deserialize(reader);
+                } catch (Exception exp)
+                {
+                    return null;
+                }
+
             }
         }
     }

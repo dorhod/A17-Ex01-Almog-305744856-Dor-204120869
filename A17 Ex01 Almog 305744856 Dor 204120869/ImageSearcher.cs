@@ -18,16 +18,15 @@ namespace A17_Ex01_UI
         List<Photo> m_25photosList;
         List<Photo> m_photosCheckedByUser;
         List<UserWithPhotos> m_PhotosByUserList = new List<UserWithPhotos>();
-        AppSettings m_Settings;
         List<Photo> m_photosToReactOn = new List<Photo>();
         User m_LoggedInUser;
 
-        public ImageSearcher(AppSettings i_Settings, User i_LoggedUser)
+        public ImageSearcher(User i_LoggedUser)
         {
             InitializeComponent();
-            m_Settings = i_Settings;
             m_LoggedInUser = i_LoggedUser;
             fetchAlltaggedPictures();
+
 
         }
 
@@ -165,7 +164,7 @@ namespace A17_Ex01_UI
 
         private void buttonOpenSelectedPhoto_Click_1(object sender, EventArgs e)
         {
-            ImageReaction newImageReaction = new ImageReaction(m_photosToReactOn.ElementAt(listViewPhotoDisplay.SelectedIndices[0]), m_Settings);
+            ImageReaction newImageReaction = new ImageReaction(m_photosToReactOn.ElementAt(listViewPhotoDisplay.SelectedIndices[0]));
             newImageReaction.Show();
         }
     }
