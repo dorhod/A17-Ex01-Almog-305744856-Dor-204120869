@@ -42,6 +42,7 @@ namespace A17_Ex01_Logic
 
             return photoExist;
         }
+
     }
 }
  
