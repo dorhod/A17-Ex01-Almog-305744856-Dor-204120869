@@ -1,11 +1,9 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Windows.Forms;
-using Facebook;
 using FacebookWrapper;
 using FacebookWrapper.ObjectModel;
-using System.Xml.Serialization;
-using System.Xml;
+
 
 
 
@@ -13,33 +11,30 @@ namespace A17_Ex01_UI
 {
     public partial class AppHomepage : Form
     {
+        User m_LoggedInUser;
+
         public AppHomepage()
         {
             InitializeComponent();
         }
 
-        protected override void OnLoad(EventArgs e)
+        protected override void OnShown(EventArgs e)
         {
             AppSettings Settings = AppSettings.LoadToFile();
 
             if(AppSettings.GetSettings().m_lastAccessToken != null)
             {
                 LoginResult result = FacebookService.Connect(AppSettings.GetSettings().m_lastAccessToken);
-                m_LoggedInUser = result.LoggedInUser;
-                fetchUserInfo();
-                buttonLogin.Text = "Logout";
+                CheckLoginResult(result);
             }
-            base.OnLoad(e);
+            base.OnShown(e);
         }
         
         protected override void OnClosing(CancelEventArgs e)
         {
             AppSettings.SaveToFile();
             base.OnClosing(e);
-
         }
-
-        User m_LoggedInUser;
         
         private void loginToUser()
         {
@@ -81,8 +76,7 @@ namespace A17_Ex01_UI
                     "rsvp_event"
                     );
                 CheckLoginResult(result);
-            }
-            
+            }  
         }
 
         private void CheckLoginResult(LoginResult loginResult)
@@ -93,7 +87,6 @@ namespace A17_Ex01_UI
                 AppSettings.GetSettings().m_lastAccessToken = loginResult.AccessToken;
                 buttonLogin.Text = "Logout";
                 fetchUserInfo();
-
             }
             else
             {
@@ -103,9 +96,11 @@ namespace A17_Ex01_UI
 
         private void fetchUserInfo()
         {
+            Cursor = System.Windows.Forms.Cursors.AppStarting;
             pictureBoxProfilPicture.LoadAsync(m_LoggedInUser.PictureNormalURL);
             fetchUserFeed();
             fetchUserPhotos();
+            Cursor = System.Windows.Forms.Cursors.Default;
         }
 
         private void fetchUserFeed()
@@ -135,43 +130,6 @@ namespace A17_Ex01_UI
                 m_LoggedInUser = null;
                 buttonLogin.Text = "Login";
             }
-        }
-
-        
-        private void pictureBoxProfilPicture_Click_1(object sender, EventArgs e)
-        {
-
-        }
-
-        private void checkBoxUserTaggedWith_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void listViewPhotoDisplay_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void pictureBoxColoredBlockTop_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void buttonFeed_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void SwitchPanelView(Control i_View)
-        {
- 
-        }
-
-        private void buttonPhotos_Click(object sender, EventArgs e)
-        {
-            ImageSearcher imageSearcher = new ImageSearcher(m_LoggedInUser);
-            SwitchPanelView(imageSearcher);
         }
     }
 }
