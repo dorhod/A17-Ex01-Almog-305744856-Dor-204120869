@@ -58,11 +58,11 @@
     <Compile Include="AppHomepage.Designer.cs">
       <DependentUpon>AppHomepage.cs</DependentUpon>
     </Compile>
-    <Compile Include="FilterFeed.cs">
+    <Compile Include="FilterWall.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="FilterFeed.Designer.cs">
-      <DependentUpon>FilterFeed.cs</DependentUpon>
+    <Compile Include="FilterWall.Designer.cs">
+      <DependentUpon>FilterWall.cs</DependentUpon>
     </Compile>
     <Compile Include="ImageReaction.cs">
       <SubType>Form</SubType>
@@ -76,25 +76,19 @@
     <Compile Include="ImageSearcher.Designer.cs">
       <DependentUpon>ImageSearcher.cs</DependentUpon>
     </Compile>
-    <Compile Include="PhotoPost.cs">
+    <Compile Include="Post.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="PhotoPost.Designer.cs">
-      <DependentUpon>PhotoPost.cs</DependentUpon>
+    <Compile Include="Post.Designer.cs">
+      <DependentUpon>Post.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="MessagePost.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="MessagePost.Designer.cs">
-      <DependentUpon>MessagePost.cs</DependentUpon>
-    </Compile>
     <EmbeddedResource Include="AppHomepage.resx">
       <DependentUpon>AppHomepage.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FilterFeed.resx">
-      <DependentUpon>FilterFeed.cs</DependentUpon>
+    <EmbeddedResource Include="FilterWall.resx">
+      <DependentUpon>FilterWall.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ImageReaction.resx">
       <DependentUpon>ImageReaction.cs</DependentUpon>
@@ -102,8 +96,8 @@
     <EmbeddedResource Include="ImageSearcher.resx">
       <DependentUpon>ImageSearcher.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PhotoPost.resx">
-      <DependentUpon>PhotoPost.cs</DependentUpon>
+    <EmbeddedResource Include="Post.resx">
+      <DependentUpon>Post.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -115,9 +109,6 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="MessagePost.resx">
-      <DependentUpon>MessagePost.cs</DependentUpon>
-    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

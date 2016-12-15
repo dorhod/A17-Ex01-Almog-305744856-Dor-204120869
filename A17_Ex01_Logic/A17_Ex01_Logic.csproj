@@ -41,7 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppSettings.cs" />
-    <Compile Include="FeedPost.cs" />
+    <Compile Include="WallPost.cs" />
     <Compile Include="UserWithPhotos.cs" />
   </ItemGroup>
   <ItemGroup>

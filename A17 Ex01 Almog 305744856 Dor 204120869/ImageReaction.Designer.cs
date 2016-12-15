@@ -68,7 +68,6 @@
             this.pictureBoxSelectedPicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBoxSelectedPicture.TabIndex = 19;
             this.pictureBoxSelectedPicture.TabStop = false;
-            this.pictureBoxSelectedPicture.Click += new System.EventHandler(this.pictureBoxSelectedPicture_Click);
             // 
             // textBoxAddAComment
             // 

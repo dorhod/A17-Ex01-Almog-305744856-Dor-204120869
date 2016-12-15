@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Windows.Forms;
 using Facebook;
-using FacebookWrapper;
 using FacebookWrapper.ObjectModel;
 using System.Dynamic;
 using A17_Ex01_Logic;
@@ -12,13 +11,13 @@ namespace A17_Ex01_UI
     public partial class ImageReaction : Form
     {
         private Photo m_CurrentPicture;
-        FacebookClient fbUser;
+        private readonly FacebookClient r_FbUser = new FacebookClient(AppSettings.GetSettings().LastAccessToken);
 
         public ImageReaction(Photo i_SelectedPhotoFromUser)
         {
             InitializeComponent();
             m_CurrentPicture = i_SelectedPhotoFromUser;
-            fbUser = new FacebookClient(AppSettings.GetSettings().m_lastAccessToken);
+            r_FbUser = new FacebookClient(AppSettings.GetSettings().LastAccessToken);
             displayPhoto();
         }
 
@@ -42,7 +41,7 @@ namespace A17_Ex01_UI
                 {"message", textBoxAddAComment.Text}
             };
 
-            fbUser.Post("/comments", commentDicitonay);
+            r_FbUser.Post("/comments", commentDicitonay);
         }
 
         private void buttonShare_Click(object sender, EventArgs e)
@@ -54,8 +53,7 @@ namespace A17_Ex01_UI
                 parameters.link = m_CurrentPicture.Link;
                 parameters.picture = "postInfo.ImageUrl";
                 parameters.story_tags = " ";
-
-                fbUser.Post("me/feed", parameters);
+                r_FbUser.Post("me/feed", parameters);
             }
 
             catch (Exception ex)
@@ -64,9 +62,5 @@ namespace A17_Ex01_UI
             }
         }
     
-        private void pictureBoxSelectedPicture_Click(object sender, EventArgs e)
-        {
-
-        }
     }
 }
