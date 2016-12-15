@@ -96,7 +96,7 @@ namespace A17_Ex01_UI
         {
             Cursor = System.Windows.Forms.Cursors.AppStarting;
             pictureBoxProfilPicture.LoadAsync(m_LoggedInUser.PictureNormalURL);
-            fetchUserFeed();
+            //fetchUserFeed();
             fetchUserPhotos();
             Cursor = System.Windows.Forms.Cursors.Default;
         }
