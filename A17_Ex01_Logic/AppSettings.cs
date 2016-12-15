@@ -6,8 +6,8 @@ namespace A17_Ex01_Logic
 {
     public class AppSettings
     {
-        public string LastAccessToken { get; set; }
-        private static AppSettings s_Settings = LoadToFile();
+        public string               LastAccessToken { get; set; }
+        private static AppSettings  s_Settings = LoadToFile();
 
         public static AppSettings GetSettings()
         {
@@ -22,21 +22,37 @@ namespace A17_Ex01_Logic
         public static void SaveToFile()
         {
             XmlSerializer SerializerObj = new XmlSerializer(s_Settings.GetType());
-            using (FileStream WriteFileStream = new FileStream(@"UserSetting.xml", FileMode.Create))
+            try
             {
-                SerializerObj.Serialize(WriteFileStream, s_Settings);
-                WriteFileStream.Close();
+                using (FileStream WriteFileStream = new FileStream(@"UserSetting.xml", FileMode.Create))
+                {
+                    SerializerObj.Serialize(WriteFileStream, s_Settings);
+                    WriteFileStream.Close();
+                }
             }
+            finally
+            {
+
+            }
+
         }
 
         public static AppSettings LoadToFile()
         {
             XmlSerializer ser = new XmlSerializer(typeof(AppSettings));
-            using (FileStream reader = new FileStream(@"UserSetting.xml", FileMode.Open))
+            try
             {
-                return (AppSettings)ser.Deserialize(reader);
+                using (FileStream reader = new FileStream(@"UserSetting.xml", FileMode.Open))
+                {
+                    return (AppSettings)ser.Deserialize(reader);
+
+                }
+            }
+            finally
+            {
 
             }
+
         }
     }
 }

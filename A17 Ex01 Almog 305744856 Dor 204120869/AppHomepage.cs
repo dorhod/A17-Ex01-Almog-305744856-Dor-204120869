@@ -77,18 +77,18 @@ namespace A17_Ex01_UI
             }  
         }
 
-        private void checkLoginResult(LoginResult loginResult)
+        private void checkLoginResult(LoginResult i_LoginResult)
         {
-            if (!string.IsNullOrEmpty(loginResult.AccessToken))
+            if (!string.IsNullOrEmpty(i_LoginResult.AccessToken))
             {
-                m_LoggedInUser = loginResult.LoggedInUser;
-                AppSettings.GetSettings().LastAccessToken = loginResult.AccessToken;
+                m_LoggedInUser = i_LoginResult.LoggedInUser;
+                AppSettings.GetSettings().LastAccessToken = i_LoginResult.AccessToken;
                 buttonLogin.Text = "Logout";
                 fetchUserInfo();
             }
             else
             {
-                MessageBox.Show(loginResult.ErrorMessage);
+                MessageBox.Show(i_LoginResult.ErrorMessage);
             }
         }
 
@@ -96,7 +96,7 @@ namespace A17_Ex01_UI
         {
             Cursor = System.Windows.Forms.Cursors.AppStarting;
             pictureBoxProfilPicture.LoadAsync(m_LoggedInUser.PictureNormalURL);
-            //fetchUserFeed();
+            fetchUserFeed();
             fetchUserPhotos();
             Cursor = System.Windows.Forms.Cursors.Default;
         }
@@ -126,6 +126,7 @@ namespace A17_Ex01_UI
             else
             {
                 m_LoggedInUser = null;
+                tabControlFeatureViewer.TabPages.Clear();
                 buttonLogin.Text = "Login";
             }
         }

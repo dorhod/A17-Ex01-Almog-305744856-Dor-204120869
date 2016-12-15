@@ -1,23 +1,19 @@
 ﻿using Facebook;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace A17_Ex01_Logic
 {
     public class WallPost
     {
-        public string Id { get; set; }
-        public string Message { get; set; }
-        public string Time { get; set; }
-        public string Story { get; set; }
-        public int LikeCount { get; set; }
-        public string Sender { get; set; }
-        public string SenderPictureURL { get; set; }
-        public string PictureURL { get; set; }
-        public JsonObject From { get; set; }
+        public string       Id { get; set; }
+        public string       Message { get; set; }
+        public string       Time { get; set; }
+        public string       Story { get; set; }
+        public int          LikeCount { get; set; }
+        public string       Sender { get; set; }
+        public string       SenderPictureURL { get; set; }
+        public string       PictureURL { get; set; }
+        public JsonObject   From { get; set; }
 
         public WallPost(JsonObject i_Post, FacebookClient i_FbUser)
         {
@@ -49,8 +45,6 @@ namespace A17_Ex01_Logic
             }
         }
 
-        
-
         private T parseJson<T>(String i_Value, JsonObject i_Json)
         {
             object jsonParse;
@@ -58,7 +52,6 @@ namespace A17_Ex01_Logic
             
             return (T) jsonParse;
         }
-
     }
 }
 

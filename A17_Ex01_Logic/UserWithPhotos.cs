@@ -1,9 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Collections;
 using FacebookWrapper.ObjectModel;
 
 namespace A17_Ex01_Logic
@@ -11,7 +7,7 @@ namespace A17_Ex01_Logic
     public class UserWithPhotos
     {
         public List<Photo> PhotosOfUser { get; set; }
-        public User TaggedUser { get; set; }
+        public User        TaggedUser { get; set; }
 
         public UserWithPhotos(User i_TaggedUser, Photo i_PhotoOfUser)
         {

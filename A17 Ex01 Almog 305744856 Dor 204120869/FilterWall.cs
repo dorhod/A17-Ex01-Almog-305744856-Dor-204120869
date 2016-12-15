@@ -10,24 +10,24 @@ namespace A17_Ex01_UI
 {
     public partial class FilterWall : UserControl
     {
-        private readonly FacebookClient r_FbUser = new FacebookClient(AppSettings.GetSettings().LastAccessToken);
-        private List<WallPost>          m_Posts = new List<WallPost>();
-        private List<Post>              m_ControlsWithPost = new List<Post>();
-        private int                     m_PostsAmountToDisplay;
+        private readonly FacebookClient     r_FbUser = new FacebookClient(AppSettings.GetSettings().LastAccessToken);
+        private List<WallPost>              m_Posts;
+        private int                         m_PostsAmountToDisplay;
 
         public FilterWall()
         {
             InitializeComponent();
             m_PostsAmountToDisplay = 10;
-            FetchPosts();          
+            fetchPosts();          
         }
 
-        public void FetchPosts()
+        private void fetchPosts()
         {
             try
             {
-                JsonObject results = (JsonObject)r_FbUser.Get("me/feed?fields=message,likes{name},comments{from},story,source,created_time,picture,from&limit=10000");
+                m_Posts = new List<WallPost>();
 
+                JsonObject results = (JsonObject)r_FbUser.Get("me/feed?fields=message,likes{name},comments{from},story,source,created_time,picture,from&limit=10000");
                 JsonArray posts = (JsonArray)results[0];
 
                 foreach (JsonObject post in posts)
@@ -37,9 +37,10 @@ namespace A17_Ex01_UI
                 }
 
                 loadFeed();
-            } catch(Exception exp)
+            }
+            finally
             {
-                Console.WriteLine(exp.ToString());
+
             }
         }
 
@@ -50,7 +51,6 @@ namespace A17_Ex01_UI
             {
                 flowLayoutPanel.Controls.Add(new Post(post));
             }
-
         }
 
         private void fatchFeedOrderedByLikes()
@@ -84,7 +84,7 @@ namespace A17_Ex01_UI
 
         private void buttonRefresh_Click(object sender, EventArgs e)
         {
-            FetchPosts();
+            fetchPosts();
         }
     }
 }

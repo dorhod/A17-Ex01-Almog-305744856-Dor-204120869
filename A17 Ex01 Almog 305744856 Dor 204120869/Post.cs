@@ -6,8 +6,8 @@ namespace A17_Ex01_UI
 {
     public partial class Post : UserControl
     {
-        public int LikeAmount { get; set; }
-        private string PostID { get; set; }
+        public int      LikeAmount { get; set; }
+        private string  PostID { get; set; }
 
         public Post(WallPost i_NewPost)
         {

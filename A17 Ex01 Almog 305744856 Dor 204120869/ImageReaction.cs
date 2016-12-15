@@ -1,16 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Windows.Forms;
-using Facebook;
 using FacebookWrapper.ObjectModel;
-using System.Dynamic;
 using A17_Ex01_Logic;
 
 namespace A17_Ex01_UI
 {
     public partial class ImageReaction : Form
     {
-        private Photo                   m_CurrentPicture;
+        private Photo m_CurrentPicture;
 
         public ImageReaction(Photo i_SelectedPhotoFromUser)
         {

@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using FacebookWrapper.ObjectModel;
 
@@ -9,13 +7,13 @@ namespace A17_Ex01_Logic
 {
     public class ImageSearcherLogic
     {
-        public List<Photo> m_AllPhotosList = new List<Photo>();
-        public List<UserWithPhotos> m_PhotosByUserList = new List<UserWithPhotos>();
+        public List<Photo>                  m_AllPhotosList = new List<Photo>();
+        public List<UserWithPhotos>         m_PhotosByUserList = new List<UserWithPhotos>();
         public Dictionary<int, List<Photo>> m_PhotosByYearList = new Dictionary<int, List<Photo>>();
-        public List<Photo> m_ListOfYears = new List<Photo>();
-        public List<PhotoTag> m_ListOfTaggedUsers = new List<PhotoTag>();
-        public List<Photo> m_photosCheckedByUser;
-        Boolean b_FirstCheck;
+        public List<Photo>                  m_ListOfYears = new List<Photo>();
+        public List<PhotoTag>               m_ListOfTaggedUsers = new List<PhotoTag>();
+        public List<Photo>                  m_PhotosCheckedByUser;
+        public Boolean                      b_FirstCheck;
 
         public ImageSearcherLogic(User i_LoggedInUser)
         {
@@ -101,7 +99,7 @@ namespace A17_Ex01_Logic
             {
                 if (i_CheckedItemsYearOfPhoto.Count > 1)
                 {
-                    m_photosCheckedByUser.Clear();
+                    m_PhotosCheckedByUser.Clear();
                 }
                 else
                 {
@@ -118,9 +116,9 @@ namespace A17_Ex01_Logic
                 {
                     foreach (Photo photo in m_PhotosByYearList[i_Year])
                     {
-                        if (!m_photosCheckedByUser.Contains(photo))
+                        if (!m_PhotosCheckedByUser.Contains(photo))
                         {
-                            m_photosCheckedByUser.Add(photo);
+                            m_PhotosCheckedByUser.Add(photo);
                         }
                     }
                     b_FirstCheck = false;
@@ -135,7 +133,7 @@ namespace A17_Ex01_Logic
         private void deletePhotos(int i_Year)
         {
             List<Photo> photosToDelete = new List<Photo>();
-            foreach (Photo photo in m_photosCheckedByUser)
+            foreach (Photo photo in m_PhotosCheckedByUser)
             {
                 if (photo.CreatedTime.GetValueOrDefault().Year != i_Year)
                 {
@@ -145,13 +143,13 @@ namespace A17_Ex01_Logic
 
             foreach (Photo photo in photosToDelete)
             {
-                m_photosCheckedByUser.Remove(photo);
+                m_PhotosCheckedByUser.Remove(photo);
             }
         }
 
         public void filterPhotosByUserName(CheckedListBox.CheckedItemCollection i_CheckedItemsTaggedInPhoto)
         {
-            m_photosCheckedByUser = new List<Photo>();
+            m_PhotosCheckedByUser = new List<Photo>();
             b_FirstCheck = true;
 
             foreach (UserWithPhotos taggedUser in m_PhotosByUserList)
@@ -180,9 +178,9 @@ namespace A17_Ex01_Logic
         {
             foreach (Photo photo in i_PhotosOfUser)
             {
-                if (!m_photosCheckedByUser.Contains(photo))
+                if (!m_PhotosCheckedByUser.Contains(photo))
                 {
-                    m_photosCheckedByUser.Add(photo);
+                    m_PhotosCheckedByUser.Add(photo);
                 }
             }
             b_FirstCheck = false;
@@ -191,16 +189,14 @@ namespace A17_Ex01_Logic
         private void crossUsersPhotos(UserWithPhotos i_TaggedUser)
         {
             List<Photo> newPhotoCheckedByUser = new List<Photo>();
-            foreach (Photo photo in m_photosCheckedByUser)
+            foreach (Photo photo in m_PhotosCheckedByUser)
             {
                 if (i_TaggedUser.IsPhotoExist(photo) == true)
                 {
                     newPhotoCheckedByUser.Add(photo);
                 }
             }
-            m_photosCheckedByUser = newPhotoCheckedByUser;
+            m_PhotosCheckedByUser = newPhotoCheckedByUser;
         }
-
-
     }
 }

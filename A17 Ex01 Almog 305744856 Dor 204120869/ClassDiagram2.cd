@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="NameAndType">
+  <Class Name="A17_Ex01_UI.AppHomepage" Collapsed="true">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIIAAAEACIBQAAAAACBgAISAAAQBAAAAgAAAAAAAAI=</HashCode>
+      <FileName>AppHomepage.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="A17_Ex01_UI.FilterWall" Collapsed="true">
+    <Position X="2.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AYCAYAAAAKAAAAAAAAGFAAACAAAAAMADACIEgAAAAAA=</HashCode>
+      <FileName>FilterWall.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="A17_Ex01_UI.ImageReaction" Collapsed="true">
+    <Position X="4" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAACACgAAAABAACAAAACBAAAABAAIAAAAAAAAAA=</HashCode>
+      <FileName>ImageReaction.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="A17_Ex01_UI.ImageSearcher" Collapsed="true">
+    <Position X="0.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ASAABAgAACABFQAAAQCAAAICAAAAAAgASIgAAAAAQAA=</HashCode>
+      <FileName>ImageSearcher.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="A17_Ex01_UI.Post" Collapsed="true">
+    <Position X="2.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABAAAAQAiAAAAEABACAAIACjAAAAAEAgEAAAABAADI=</HashCode>
+      <FileName>Post.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="A17_Ex01_UI.Program" Collapsed="true">
+    <Position X="4" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
+      <FileName>Program.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="A17_Ex01_UI.Properties.Resources" Collapsed="true">
+    <Position X="0.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAACAAAAAAAAAAAABEAAAEQAIIAAAAAAAAAAAAIA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="A17_Ex01_UI.Properties.Settings" Collapsed="true">
+    <Position X="2.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAIAAAAAABAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

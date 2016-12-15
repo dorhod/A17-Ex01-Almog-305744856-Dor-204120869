@@ -10,28 +10,17 @@ namespace A17_Ex01_Logic
     {
         public static void CommentOnPost(String i_Message, String i_PostID)
         {
-            FacebookClient fbUser = new FacebookClient(AppSettings.GetSettings().LastAccessToken);
-
             Dictionary<string, object> commentDicitonay = new Dictionary<string, object>
             {
                 {"id", i_PostID},
                 {"message", i_Message}
             };
 
-            try
-            {
-                fbUser.Post("/comments", commentDicitonay);
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.ToString());
-            }
+            connectAndPost(commentDicitonay, "/comments");
         }
 
         public static void SharePost(String i_Message, String i_PostLink)
         {
-            FacebookClient fbUser = new FacebookClient(AppSettings.GetSettings().LastAccessToken);
-
             Dictionary<string, object> shareDicitonay = new Dictionary<string, object>
                 {
                     {"message", i_Message},
@@ -39,9 +28,16 @@ namespace A17_Ex01_Logic
                     {"picture", "postInfo.ImageUrl"},
                     {"story_tags", " " }
                 };
+
+            connectAndPost(shareDicitonay, "me/feed");
+        }
+
+        private static void connectAndPost(Dictionary<string, object> i_Parmeters, String i_Request)
+        {
             try
             {
-                fbUser.Post("me/feed", shareDicitonay);
+                FacebookClient fbUser = new FacebookClient(AppSettings.GetSettings().LastAccessToken);
+                fbUser.Post(i_Request, i_Parmeters);
             }
             catch (Exception exp)
             {
