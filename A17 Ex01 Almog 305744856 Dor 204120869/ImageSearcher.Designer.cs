@@ -50,7 +50,6 @@
             this.checkBoxUserTaggedWith.Name = "checkBoxUserTaggedWith";
             this.checkBoxUserTaggedWith.Size = new System.Drawing.Size(199, 204);
             this.checkBoxUserTaggedWith.TabIndex = 10;
-            this.checkBoxUserTaggedWith.SelectedIndexChanged += new System.EventHandler(this.checkBoxUserTaggedWith_SelectedIndexChanged);
             // 
             // listViewPhotoDisplay
             // 

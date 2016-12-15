@@ -64,9 +64,5 @@ namespace A17_Ex01_UI
             }
         }
     
-        private void pictureBoxSelectedPicture_Click(object sender, EventArgs e)
-        {
-
-        }
     }
 }

@@ -15,22 +15,19 @@ namespace A17_Ex01_UI
     public partial class ImageSearcher : UserControl
     {
         List<Photo> m_AllPhotosList = new List<Photo>();
-        List<User> m_TagsWith = new List<User>();
-        List<Photo> m_25photosList;
         List<Photo> m_photosCheckedByUser;
         List<UserWithPhotos> m_PhotosByUserList = new List<UserWithPhotos>();
         Dictionary<int, List<Photo>> m_PhotosByYearList = new Dictionary<int, List<Photo>>(); 
         List<Photo> m_photosToReactOn = new List<Photo>();
         Boolean b_FirstCheck = true;
         User m_LoggedInUser;
-        AppSettings m_Settings;
+
 
         public ImageSearcher(User i_LoggedUser)
         {
             InitializeComponent();
             m_LoggedInUser = i_LoggedUser;
             fetchAlltaggedPictures();
-
 
         }
 
@@ -46,8 +43,6 @@ namespace A17_Ex01_UI
             showPhotos(m_photosCheckedByUser);
         }
 
- 
-
         private void fetchAlltaggedPictures()
         {
             PicturesColleciton picture = m_LoggedInUser.Pictures;
@@ -58,14 +53,7 @@ namespace A17_Ex01_UI
             }
             addPhotos(m_LoggedInUser.PhotosTaggedIn);
 
-            m_25photosList = new List<Photo>();
-            for (int i = 1; i < 5; i++)
-            {
-                m_25photosList.Add(m_AllPhotosList[i]);
-
-            }
-
-            showPhotos(m_25photosList);
+            showPhotos(m_AllPhotosList.GetRange(0, 5));
         }
 
         private void showPhotos(List<Photo> photolist)
@@ -125,7 +113,6 @@ namespace A17_Ex01_UI
                         // Add all tagged names to check box list
                         if (!checkBoxUserTaggedWith.Items.Contains(taggedUserName))
                         {
-                            m_TagsWith.Add(photoTag.User);
                             checkBoxUserTaggedWith.Items.Add(taggedUserName);
                         }
                     }
@@ -137,6 +124,7 @@ namespace A17_Ex01_UI
                 // Create a list of photos by the year they were added
                 m_PhotosByYearList[photo.CreatedTime.GetValueOrDefault().Year].Add(photo);
             }
+
         }
 
         private int PhotosByUserListContains(string nameOfUser)
@@ -235,11 +223,6 @@ namespace A17_Ex01_UI
         {
             ImageReaction newImageReaction = new ImageReaction(m_photosToReactOn.ElementAt(listViewPhotoDisplay.SelectedIndices[0]));
             newImageReaction.Show();
-        }
-
-        private void checkBoxUserTaggedWith_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
         }
 
     }
