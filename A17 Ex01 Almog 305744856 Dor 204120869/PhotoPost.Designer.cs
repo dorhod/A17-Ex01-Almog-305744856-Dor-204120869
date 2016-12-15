@@ -259,7 +259,7 @@
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "PhotoPost";
-            this.Size = new System.Drawing.Size(1400, 616);
+            this.Size = new System.Drawing.Size(1400, 493);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.tableLayoutPanel5.ResumeLayout(false);
