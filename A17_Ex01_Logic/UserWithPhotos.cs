@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using Facebook;
 using FacebookWrapper;
 using FacebookWrapper.ObjectModel;
 using System.Collections;
 
-namespace A17_Ex01_UI
+namespace A17_Ex01_Logic
 {
     class UserWithPhotos
     {
@@ -44,4 +45,4 @@ namespace A17_Ex01_UI
 
     }
 }
-
+ 

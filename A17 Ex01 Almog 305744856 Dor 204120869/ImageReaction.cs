@@ -18,11 +18,19 @@ namespace A17_Ex01_UI
             InitializeComponent();
             m_CurrentPicture = i_SelectedPhotoFromUser;
             fbUser = new FacebookClient(AppSettings.GetSettings().m_lastAccessToken);
+            displayPhoto();
         }
 
-        private void buttonLike_Click(object sender, EventArgs e)
+        private void displayPhoto()
         {
-            
+            try
+            {
+                pictureBoxSelectedPicture.Image = m_CurrentPicture.ImageNormal;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
         }
 
         private void buttonComment_Click(object sender, EventArgs e)
@@ -57,15 +65,6 @@ namespace A17_Ex01_UI
     
         private void pictureBoxSelectedPicture_Click(object sender, EventArgs e)
         {
-            try
-            {
-                pictureBoxSelectedPicture.Image = m_CurrentPicture.ImageNormal;
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex);
-            }
-
 
         }
     }

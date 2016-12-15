@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 using System.Collections;
 using System.IO;
 using System.Xml.Serialization;
-using System.Xml;
 
-namespace A17_Ex01_UI
+namespace A17_Ex01_Logic
 {
     public class AppSettings
     {

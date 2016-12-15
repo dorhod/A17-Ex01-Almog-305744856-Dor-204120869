@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace A17_Ex01_UI
+namespace A17_Ex01_Logic
 {
     public class Post
     {
