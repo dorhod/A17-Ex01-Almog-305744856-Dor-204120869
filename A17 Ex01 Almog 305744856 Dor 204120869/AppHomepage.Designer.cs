@@ -61,7 +61,6 @@
             this.pictureBoxColoredBlockTop.Size = new System.Drawing.Size(1592, 48);
             this.pictureBoxColoredBlockTop.TabIndex = 7;
             this.pictureBoxColoredBlockTop.TabStop = false;
-            this.pictureBoxColoredBlockTop.Click += new System.EventHandler(this.pictureBoxColoredBlockTop_Click);
             // 
             // pictureBoxProfilPicture
             // 
@@ -73,14 +72,13 @@
             this.pictureBoxProfilPicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBoxProfilPicture.TabIndex = 11;
             this.pictureBoxProfilPicture.TabStop = false;
-            this.pictureBoxProfilPicture.Click += new System.EventHandler(this.pictureBoxProfilPicture_Click_1);
             // 
             // tabControlFeatureViewer
             // 
-            this.tabControlFeatureViewer.Location = new System.Drawing.Point(46, 196);
+            this.tabControlFeatureViewer.Location = new System.Drawing.Point(30, 196);
             this.tabControlFeatureViewer.Name = "tabControlFeatureViewer";
             this.tabControlFeatureViewer.SelectedIndex = 0;
-            this.tabControlFeatureViewer.Size = new System.Drawing.Size(1602, 937);
+            this.tabControlFeatureViewer.Size = new System.Drawing.Size(1600, 930);
             this.tabControlFeatureViewer.TabIndex = 15;
             // 
             // AppHomepage
@@ -93,6 +91,7 @@
             this.Controls.Add(this.pictureBoxProfilPicture);
             this.Controls.Add(this.buttonLogin);
             this.Controls.Add(this.pictureBoxColoredBlockTop);
+            this.Cursor = System.Windows.Forms.Cursors.AppStarting;
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "AppHomepage";
             this.Text = "Homepage";
