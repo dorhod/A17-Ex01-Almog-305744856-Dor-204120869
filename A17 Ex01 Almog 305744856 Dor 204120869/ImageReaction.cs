@@ -10,14 +10,12 @@ namespace A17_Ex01_UI
 {
     public partial class ImageReaction : Form
     {
-        private Photo m_CurrentPicture;
-        private readonly FacebookClient r_FbUser = new FacebookClient(AppSettings.GetSettings().LastAccessToken);
+        private Photo                   m_CurrentPicture;
 
         public ImageReaction(Photo i_SelectedPhotoFromUser)
         {
             InitializeComponent();
             m_CurrentPicture = i_SelectedPhotoFromUser;
-            r_FbUser = new FacebookClient(AppSettings.GetSettings().LastAccessToken);
             displayPhoto();
         }
 
@@ -35,32 +33,15 @@ namespace A17_Ex01_UI
 
         private void buttonComment_Click(object sender, EventArgs e)
         {
-            Dictionary<string, object> commentDicitonay = new Dictionary<string, object>
-            {
-                {"id", m_CurrentPicture.Id},
-                {"message", textBoxAddAComment.Text}
-            };
-
-            r_FbUser.Post("/comments", commentDicitonay);
+            PostReaction.CommentOnPost(textBoxAddAComment.Text, m_CurrentPicture.Id);
+            this.Close();
         }
 
         private void buttonShare_Click(object sender, EventArgs e)
         {
-           try
-           {
-                dynamic parameters = new ExpandoObject();
-                parameters.message = textBoxAddAComment.Text;
-                parameters.link = m_CurrentPicture.Link;
-                parameters.picture = "postInfo.ImageUrl";
-                parameters.story_tags = " ";
-                r_FbUser.Post("me/feed", parameters);
-            }
-
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.ToString());
-            }
+            PostReaction.SharePost(textBoxAddAComment.Text, m_CurrentPicture.Link);
+            this.Close();
         }
-    
+
     }
 }

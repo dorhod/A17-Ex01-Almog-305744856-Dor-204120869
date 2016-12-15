@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppSettings.cs" />
+    <Compile Include="PostReaction.cs" />
     <Compile Include="WallPost.cs" />
     <Compile Include="UserWithPhotos.cs" />
   </ItemGroup>

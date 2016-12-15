@@ -11,41 +11,42 @@ namespace A17_Ex01_UI
     public partial class FilterWall : UserControl
     {
         private readonly FacebookClient r_FbUser = new FacebookClient(AppSettings.GetSettings().LastAccessToken);
-        private List<WallPost> m_Posts = new List<WallPost>();
-        private List<Post> m_ControlsWithPost = new List<Post>();
+        private List<WallPost>          m_Posts = new List<WallPost>();
+        private List<Post>              m_ControlsWithPost = new List<Post>();
+        private int                     m_PostsAmountToDisplay;
 
         public FilterWall()
         {
             InitializeComponent();
-            FetchPosts();
-            
-        }
-
-        protected override void OnLoad(EventArgs e)
-        {
-            base.OnLoad(e);
+            m_PostsAmountToDisplay = 10;
+            FetchPosts();          
         }
 
         public void FetchPosts()
         {
-            JsonObject results = (JsonObject)r_FbUser.Get("me/feed?fields=message,likes{name},comments{from},story,source,created_time,picture,from&limit=10000");
-
-            JsonArray posts = (JsonArray)results[0];
-
-            foreach (JsonObject post in posts)
+            try
             {
-                WallPost newPost = new WallPost(post, r_FbUser);
-                m_Posts.Add(newPost);
-            }
+                JsonObject results = (JsonObject)r_FbUser.Get("me/feed?fields=message,likes{name},comments{from},story,source,created_time,picture,from&limit=10000");
 
-            fetchFeed();
+                JsonArray posts = (JsonArray)results[0];
+
+                foreach (JsonObject post in posts)
+                {
+                    WallPost newPost = new WallPost(post, r_FbUser);
+                    m_Posts.Add(newPost);
+                }
+
+                loadFeed();
+            } catch(Exception exp)
+            {
+                Console.WriteLine(exp.ToString());
+            }
         }
 
-
-        private void fetchFeed()
+        private void setFeed(List<WallPost> i_PhotosToDisplay)
         {
             flowLayoutPanel.Controls.Clear();
-            foreach (WallPost post in m_Posts.Take(30))
+            foreach (WallPost post in i_PhotosToDisplay.Take(m_PostsAmountToDisplay))
             {
                 flowLayoutPanel.Controls.Add(new Post(post));
             }
@@ -54,21 +55,36 @@ namespace A17_Ex01_UI
 
         private void fatchFeedOrderedByLikes()
         {
-            IEnumerable<Post> orderFeedByLikes = m_ControlsWithPost.OrderByDescending(post => post.LikeAmount);
-            flowLayoutPanel.Controls.Clear();
-            flowLayoutPanel.Controls.AddRange(orderFeedByLikes.ToArray());
+            IEnumerable<WallPost> orderFeedByLikes = m_Posts.OrderByDescending(post => post.LikeCount);
+            setFeed(orderFeedByLikes.ToList());
         }
 
         private void comboBoxWallFilter_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if(comboBoxWallFilter.SelectedIndex == 0)
-            {
-                fetchFeed();
-            }
-            else
+            loadFeed();
+        }
+
+        private void comboBoxNumberToDisplay_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            m_PostsAmountToDisplay = comboBoxNumberToDisplay.SelectedItem.ToString() == "All" ? m_Posts.Count : int.Parse(comboBoxNumberToDisplay.SelectedItem.ToString());
+            loadFeed();
+        }
+
+        private void loadFeed()
+        {
+            if (comboBoxWallFilter.SelectedIndex == 1)
             {
                 fatchFeedOrderedByLikes();
             }
+            else
+            {
+                setFeed(m_Posts);
+            }
+        }
+
+        private void buttonRefresh_Click(object sender, EventArgs e)
+        {
+            FetchPosts();
         }
     }
 }

@@ -41,7 +41,7 @@
             this.labelSender = new System.Windows.Forms.Label();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.buttonComment = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.textBoxComment = new System.Windows.Forms.TextBox();
             this.labelStory = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel5.SuspendLayout();
@@ -67,7 +67,7 @@
             this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel2, 0, 8);
             this.tableLayoutPanel1.Controls.Add(this.labelStory, 0, 4);
             this.tableLayoutPanel1.GrowStyle = System.Windows.Forms.TableLayoutPanelGrowStyle.FixedSize;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(130, 0);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(29, 4);
             this.tableLayoutPanel1.MaximumSize = new System.Drawing.Size(1114, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 9;
@@ -206,7 +206,7 @@
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 84.46069F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 15.53931F));
             this.tableLayoutPanel2.Controls.Add(this.buttonComment, 1, 0);
-            this.tableLayoutPanel2.Controls.Add(this.textBox1, 0, 0);
+            this.tableLayoutPanel2.Controls.Add(this.textBoxComment, 0, 0);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 336);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
@@ -230,18 +230,19 @@
             this.buttonComment.TabIndex = 8;
             this.buttonComment.Text = "Comment";
             this.buttonComment.UseVisualStyleBackColor = true;
+            this.buttonComment.Click += new System.EventHandler(this.buttonComment_Click);
             // 
-            // textBox1
+            // textBoxComment
             // 
-            this.textBox1.AllowDrop = true;
-            this.textBox1.BackColor = System.Drawing.Color.White;
-            this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.textBox1.Location = new System.Drawing.Point(3, 16);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(3, 13, 3, 3);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(906, 31);
-            this.textBox1.TabIndex = 1;
-            this.textBox1.Text = "Write a comment...";
+            this.textBoxComment.AllowDrop = true;
+            this.textBoxComment.BackColor = System.Drawing.Color.White;
+            this.textBoxComment.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.textBoxComment.Location = new System.Drawing.Point(3, 16);
+            this.textBoxComment.Margin = new System.Windows.Forms.Padding(3, 13, 3, 3);
+            this.textBoxComment.Name = "textBoxComment";
+            this.textBoxComment.Size = new System.Drawing.Size(906, 31);
+            this.textBoxComment.TabIndex = 1;
+            this.textBoxComment.Text = "Write a comment...";
             // 
             // labelStory
             // 
@@ -255,7 +256,7 @@
             this.labelStory.TabIndex = 7;
             this.labelStory.Text = "Story";
             // 
-            // PhotoPost
+            // Post
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -264,8 +265,8 @@
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.Controls.Add(this.tableLayoutPanel1);
             this.MaximumSize = new System.Drawing.Size(1400, 0);
-            this.Name = "PhotoPost";
-            this.Size = new System.Drawing.Size(1400, 414);
+            this.Name = "Post";
+            this.Size = new System.Drawing.Size(1182, 418);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.tableLayoutPanel5.ResumeLayout(false);
@@ -295,7 +296,7 @@
         private System.Windows.Forms.Label labelTime;
         private System.Windows.Forms.Label labelSender;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox textBoxComment;
         private System.Windows.Forms.Button buttonComment;
         private System.Windows.Forms.Label label_likeAmount;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel5;
