@@ -20,10 +20,10 @@ namespace A17_Ex01_UI
         {
             AppSettings Settings = AppSettings.LoadToFile();
 
-            if(AppSettings.GetSettings().m_lastAccessToken != null)
+            if(AppSettings.GetSettings().LastAccessToken != null)
             {
-                LoginResult result = FacebookService.Connect(AppSettings.GetSettings().m_lastAccessToken);
-                CheckLoginResult(result);
+                LoginResult result = FacebookService.Connect(AppSettings.GetSettings().LastAccessToken);
+                checkLoginResult(result);
             }
             base.OnShown(e);
         }
@@ -73,16 +73,16 @@ namespace A17_Ex01_UI
                     "publish_actions",
                     "rsvp_event"
                     );
-                CheckLoginResult(result);
+                checkLoginResult(result);
             }  
         }
 
-        private void CheckLoginResult(LoginResult loginResult)
+        private void checkLoginResult(LoginResult loginResult)
         {
             if (!string.IsNullOrEmpty(loginResult.AccessToken))
             {
                 m_LoggedInUser = loginResult.LoggedInUser;
-                AppSettings.GetSettings().m_lastAccessToken = loginResult.AccessToken;
+                AppSettings.GetSettings().LastAccessToken = loginResult.AccessToken;
                 buttonLogin.Text = "Logout";
                 fetchUserInfo();
             }
@@ -105,7 +105,7 @@ namespace A17_Ex01_UI
         {
             TabPage tabPageFeed = new TabPage();
             tabPageFeed.Text = "Feed";
-            tabPageFeed.Controls.Add(new FilterFeed());
+            tabPageFeed.Controls.Add(new FilterWall());
             tabControlFeatureViewer.TabPages.Add(tabPageFeed);
         }
 
@@ -129,5 +129,6 @@ namespace A17_Ex01_UI
                 buttonLogin.Text = "Login";
             }
         }
+
     }
 }

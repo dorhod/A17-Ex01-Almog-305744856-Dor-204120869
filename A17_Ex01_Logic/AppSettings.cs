@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Collections;
+﻿
 using System.IO;
 using System.Xml.Serialization;
 
@@ -11,26 +6,25 @@ namespace A17_Ex01_Logic
 {
     public class AppSettings
     {
-        public string m_lastAccessToken { get; set; }
-        private static AppSettings Settings = LoadToFile();
+        public string LastAccessToken { get; set; }
+        private static AppSettings s_Settings = LoadToFile();
 
         public static AppSettings GetSettings()
         {
-            if(Settings == null)
+            if(s_Settings == null)
             {
-                Settings = new AppSettings();
+                s_Settings = new AppSettings();
             }
 
-            return Settings;
+            return s_Settings;
         }
 
         public static void SaveToFile()
         {
-            XmlSerializer SerializerObj = new XmlSerializer(Settings.GetType());
+            XmlSerializer SerializerObj = new XmlSerializer(s_Settings.GetType());
             using (FileStream WriteFileStream = new FileStream(@"UserSetting.xml", FileMode.Create))
             {
-                SerializerObj.Serialize(WriteFileStream, Settings);
-                // Cleanup
+                SerializerObj.Serialize(WriteFileStream, s_Settings);
                 WriteFileStream.Close();
             }
         }
@@ -40,13 +34,7 @@ namespace A17_Ex01_Logic
             XmlSerializer ser = new XmlSerializer(typeof(AppSettings));
             using (FileStream reader = new FileStream(@"UserSetting.xml", FileMode.Open))
             {
-                try
-                {
-                    return (AppSettings)ser.Deserialize(reader);
-                } catch (Exception exp)
-                {
-                    return null;
-                }
+                return (AppSettings)ser.Deserialize(reader);
 
             }
         }
