@@ -3,9 +3,7 @@ using System.ComponentModel;
 using System.Windows.Forms;
 using FacebookWrapper;
 using FacebookWrapper.ObjectModel;
-
-
-
+using A17_Ex01_Logic;
 
 namespace A17_Ex01_UI
 {

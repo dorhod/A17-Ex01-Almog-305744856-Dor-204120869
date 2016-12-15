@@ -5,6 +5,7 @@ using Facebook;
 using FacebookWrapper;
 using FacebookWrapper.ObjectModel;
 using System.Dynamic;
+using A17_Ex01_Logic;
 
 namespace A17_Ex01_UI
 {

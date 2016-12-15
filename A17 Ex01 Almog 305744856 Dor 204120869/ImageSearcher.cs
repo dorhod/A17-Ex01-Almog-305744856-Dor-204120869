@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using FacebookWrapper.ObjectModel;
+using A17_Ex01_Logic;
 
 namespace A17_Ex01_UI
 {
@@ -17,7 +18,7 @@ namespace A17_Ex01_UI
         List<User> m_TagsWith = new List<User>();
         List<Photo> m_25photosList;
         List<Photo> m_photosCheckedByUser;
-        List<A17_Ex01_Logic. UserWithPhotos> m_PhotosByUserList = new List<UserWithPhotos>();
+        List<UserWithPhotos> m_PhotosByUserList = new List<UserWithPhotos>();
         Dictionary<int, List<Photo>> m_PhotosByYearList = new Dictionary<int, List<Photo>>(); 
         List<Photo> m_photosToReactOn = new List<Photo>();
         Boolean b_FirstCheck = true;

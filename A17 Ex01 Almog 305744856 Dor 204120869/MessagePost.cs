@@ -7,12 +7,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using A17_Ex01_Logic;
 
 namespace A17_Ex01_UI
 {
     public partial class MessagePost : UserControl
     {
-        public MessagePost(Post i_NewPost)
+        public MessagePost(FeedPost i_NewPost)
         {
             InitializeComponent();
             label_message.Text = i_NewPost.message;

@@ -7,12 +7,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using A17_Ex01_Logic;
 
 namespace A17_Ex01_UI
 {
     public partial class PhotoPost : UserControl
     {
-        public PhotoPost(Post i_NewPost)
+        public PhotoPost(FeedPost i_NewPost)
         {
             InitializeComponent();
 
@@ -22,6 +23,7 @@ namespace A17_Ex01_UI
             labelTime.Text = i_NewPost.time;
             labelStory.Text = i_NewPost.story;
             pictureBox_PostPic.ImageLocation = i_NewPost.pictureURL;
+
             pictureBoxSenderPhoto.ImageLocation = i_NewPost.senderPictureURL;
         }
     }

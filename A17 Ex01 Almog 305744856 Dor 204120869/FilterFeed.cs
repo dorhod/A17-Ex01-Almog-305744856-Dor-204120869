@@ -8,13 +8,16 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Facebook;
+using A17_Ex01_Logic;
+
 
 namespace A17_Ex01_UI
 {
     public partial class FilterFeed : UserControl
     {
         FacebookClient fbUser;
-        List<Post> m_posts = new List<Post>();
+        List<FeedPost> m_Posts = new List<FeedPost>();
+        List<PhotoPost> m_ControlsWithPost = new List<PhotoPost>();
 
         public FilterFeed()
         {
@@ -25,11 +28,11 @@ namespace A17_Ex01_UI
 
         protected override void OnLoad(EventArgs e)
         {
-            FatchFeed();
+            FatchPosts();
             base.OnLoad(e);
         }
 
-        public void FatchFeed()
+        public void FatchPosts()
         {
             JsonObject results = (JsonObject)fbUser.Get("me/feed?fields=message,likes{name},comments{from},story,source,created_time,picture,from&limit=10000");
 
@@ -37,23 +40,27 @@ namespace A17_Ex01_UI
 
             foreach (JsonObject post in posts)
             {
-
-                Post newPost = new Post(post, fbUser);
-                m_posts.Add(newPost);
+                FeedPost newPost = new FeedPost(post, fbUser);
+                m_Posts.Add(newPost);
             }
+            FatchFeed();
+        }
 
-            IEnumerable<Post> orderFeedByLikes = m_posts.OrderByDescending(post => post.likeCount);
-            foreach (Post post in orderFeedByLikes)
+        private void FatchFeed()
+        {
+            foreach (FeedPost post in m_Posts)
             {
-                if (post.pictureURL == null)
-                {
-                    flowLayoutPanel.Controls.Add(new MessagePost(post));
-                }
-                else
-                {
-                    flowLayoutPanel.Controls.Add(new PhotoPost(post));
-                }
+                m_ControlsWithPost.Add(new PhotoPost(post));
             }
+
+            flowLayoutPanel.Controls.AddRange(m_ControlsWithPost.ToArray());
+            flowLayoutPanel.CreateControl();
+        }
+
+        private void FatchFeedOrderedByLikes()
+        {
+            //IEnumerable<PhotoPost> orderFeedByLikes = m_ControlsWithPost.OrderByDescending(post => post.m_LikeAmount);
+
         }
 
     }

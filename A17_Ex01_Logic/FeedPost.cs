@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace A17_Ex01_Logic
 {
-    public class Post
+    public class FeedPost
     {
         public string id { get; set; }
         public string message { get; set; }
@@ -19,7 +19,7 @@ namespace A17_Ex01_Logic
         public string pictureURL { get; set; }
         public JsonObject from { get; set; }
 
-        public Post(JsonObject i_post, FacebookClient fbUser)
+        public FeedPost(JsonObject i_post, FacebookClient fbUser)
         {
             object o_temp;
             if(i_post.TryGetValue("from", out o_temp))

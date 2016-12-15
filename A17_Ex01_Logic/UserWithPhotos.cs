@@ -3,14 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Facebook;
-using FacebookWrapper;
-using FacebookWrapper.ObjectModel;
 using System.Collections;
+using FacebookWrapper.ObjectModel;
 
 namespace A17_Ex01_Logic
 {
-    class UserWithPhotos
+    public class UserWithPhotos
     {
         public List<Photo> m_PhotosOfUser { get; set; }
         public User m_TaggedUser { get; set; }
