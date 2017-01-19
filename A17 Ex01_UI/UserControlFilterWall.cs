@@ -5,36 +5,54 @@ using System.Linq;
 using System.Windows.Forms;
 using Facebook;
 using A17_Ex01_Logic;
+using System.Threading;
 
 namespace A17_Ex01_UI
 {
-    public partial class FilterWall : UserControl
+    public partial class UserControlFilterWall : UserControl
     {
         private readonly FacebookClient     r_FbUser = new FacebookClient(AppSettings.GetSettings().LastAccessToken);
         private List<WallPost>              m_Posts;
         private int                         m_PostsAmountToDisplay;
 
-        public FilterWall()
+        public UserControlFilterWall()
         {
             InitializeComponent();
-            m_PostsAmountToDisplay = 10;
-            fetchPosts();          
+            m_PostsAmountToDisplay = 10;          
         }
 
-        private void fetchPosts()
+        public void fetchPosts()
         {
             try
             {
+                Console.WriteLine("ok");
+
                 m_Posts = new List<WallPost>();
 
                 JsonObject results = (JsonObject)r_FbUser.Get("me/feed?fields=message,likes{name},comments{from},story,source,created_time,picture,from&limit=10000");
                 JsonArray posts = (JsonArray)results[0];
-
-                foreach (JsonObject post in posts)
+                Thread featch = new Thread(() =>
                 {
-                    WallPost newPost = new WallPost(post, r_FbUser);
-                    m_Posts.Add(newPost);
-                }
+                    foreach (JsonObject post in posts)
+                    {
+                        Thread T = new Thread(() =>
+                        {
+                            WallPost newPost = new WallPost(post, r_FbUser);
+                            lock (this)
+                            {
+                                m_Posts.Add(newPost);
+                            }
+
+                        });
+                        T.Start();
+                    }
+
+                    Console.WriteLine("");
+                    
+                });
+
+                featch.Start();
+                featch.Join();
 
                 loadFeed();
             }
@@ -49,7 +67,7 @@ namespace A17_Ex01_UI
             flowLayoutPanel.Controls.Clear();
             foreach (WallPost post in i_PhotosToDisplay.Take(m_PostsAmountToDisplay))
             {
-                flowLayoutPanel.Controls.Add(new Post(post));
+                flowLayoutPanel.Controls.Add(new UserControlPost(post));
             }
         }
 

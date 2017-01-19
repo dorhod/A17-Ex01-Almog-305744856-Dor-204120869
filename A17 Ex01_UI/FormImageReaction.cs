@@ -5,11 +5,11 @@ using A17_Ex01_Logic;
 
 namespace A17_Ex01_UI
 {
-    public partial class ImageReaction : Form
+    public partial class FormImageReaction : Form
     {
         private Photo m_CurrentPicture;
 
-        public ImageReaction(Photo i_SelectedPhotoFromUser)
+        public FormImageReaction(Photo i_SelectedPhotoFromUser)
         {
             InitializeComponent();
             m_CurrentPicture = i_SelectedPhotoFromUser;

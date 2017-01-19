@@ -4,14 +4,23 @@ using System.Windows.Forms;
 using FacebookWrapper;
 using FacebookWrapper.ObjectModel;
 using A17_Ex01_Logic;
+using System.Threading;
+
+// $G$ RUL-003 (-10) Diagram document should be attached to the solution.
+// $G$ CSS-016 (-15) Bad class name - The name of classes derived from Form should begin with Form.
+// $G$ CSS-999 (-10) StyleCop errors
+// $G$ SFN-001 (-3) Basic facebook experience is poor.
+
+// $G$ THE-001 (-29) your grade on diagrams document - 71. please see comments inside the document. 
 
 namespace A17_Ex01_UI
 {
-    public partial class AppHomepage : Form
+    public partial class FormAppHomepage : Form
     {
         User m_LoggedInUser;
+        object key;
 
-        public AppHomepage()
+        public FormAppHomepage()
         {
             InitializeComponent();
         }
@@ -22,8 +31,14 @@ namespace A17_Ex01_UI
 
             if(AppSettings.GetSettings().LastAccessToken != null)
             {
-                LoginResult result = FacebookService.Connect(AppSettings.GetSettings().LastAccessToken);
-                checkLoginResult(result);
+                try
+                {
+                    LoginResult result = FacebookService.Connect(AppSettings.GetSettings().LastAccessToken);
+                    checkLoginResult(result);
+                }catch (Exception ex)
+                {
+                    AppSettings.GetSettings().LastAccessToken = null;
+                }
             }
             base.OnShown(e);
         }
@@ -96,25 +111,38 @@ namespace A17_Ex01_UI
         {
             Cursor = System.Windows.Forms.Cursors.AppStarting;
             pictureBoxProfilPicture.LoadAsync(m_LoggedInUser.PictureNormalURL);
+            //TabPage tabPagePhotos = new TabPage();
+            //addPage(tabPagePhotos);
+            
             fetchUserFeed();
-            fetchUserPhotos();
+
             Cursor = System.Windows.Forms.Cursors.Default;
         }
 
         private void fetchUserFeed()
         {
             TabPage tabPageFeed = new TabPage();
+            addPage(tabPageFeed);
+
             tabPageFeed.Text = "Feed";
-            tabPageFeed.Controls.Add(new FilterWall());
-            tabControlFeatureViewer.TabPages.Add(tabPageFeed);
+            UserControlFilterWall PageFeed = new UserControlFilterWall();
+            tabPageFeed.Controls.Add(PageFeed);
+
+            PageFeed.fetchPosts();
         }
 
-        private void fetchUserPhotos()
-        {
-            TabPage tabPagePhotos = new TabPage();
+        private TabPage fetchUserPhotos(TabPage tabPagePhotos) { 
             tabPagePhotos.Text = "Photos";
-            tabPagePhotos.Controls.Add(new ImageSearcher(m_LoggedInUser));
-            tabControlFeatureViewer.TabPages.Add(tabPagePhotos);
+            tabPagePhotos.Controls.Add(new UserControlImageSearcher(m_LoggedInUser));
+            return tabPagePhotos;
+        }
+
+
+        private void addPage(TabPage page)
+        {
+            lock (this) { 
+                tabControlFeatureViewer.TabPages.Add(page);
+            }
         }
 
         private void buttonLogin_Click(object sender, EventArgs e)
@@ -126,6 +154,7 @@ namespace A17_Ex01_UI
             else
             {
                 m_LoggedInUser = null;
+                pictureBoxProfilPicture.ImageLocation = "";
                 tabControlFeatureViewer.TabPages.Clear();
                 buttonLogin.Text = "Login";
             }

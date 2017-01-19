@@ -1,6 +1,6 @@
 ﻿namespace A17_Ex01_UI
 {
-    partial class ImageSearcher
+    partial class UserControlImageSearcher
     {
         /// <summary> 
         /// Required designer variable.

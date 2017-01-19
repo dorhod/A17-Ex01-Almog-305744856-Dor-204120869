@@ -1,6 +1,6 @@
 ﻿namespace A17_Ex01_UI
 {
-    partial class AppHomepage
+    partial class FormAppHomepage
     {
         /// <summary>
         /// Required designer variable.

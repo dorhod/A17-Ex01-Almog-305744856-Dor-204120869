@@ -1,4 +1,5 @@
 ﻿
+using System;
 using System.IO;
 using System.Xml.Serialization;
 
@@ -46,11 +47,12 @@ namespace A17_Ex01_Logic
                 {
                     return (AppSettings)ser.Deserialize(reader);
 
-                }
+                } 
             }
-            finally
+            catch(Exception exp)
             {
-
+                Console.WriteLine(exp.ToString());
+                return null;
             }
 
         }

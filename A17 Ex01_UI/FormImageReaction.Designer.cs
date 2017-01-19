@@ -1,6 +1,6 @@
 ﻿namespace A17_Ex01_UI
 {
-    partial class ImageReaction
+    partial class FormImageReaction
     {
         /// <summary>
         /// Required designer variable.

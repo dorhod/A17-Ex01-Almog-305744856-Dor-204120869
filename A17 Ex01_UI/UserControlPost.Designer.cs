@@ -1,6 +1,6 @@
 ﻿namespace A17_Ex01_UI
 {
-    partial class Post
+    partial class UserControlPost
     {
         /// <summary> 
         /// Required designer variable.

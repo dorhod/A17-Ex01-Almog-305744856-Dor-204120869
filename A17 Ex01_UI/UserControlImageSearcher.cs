@@ -7,13 +7,13 @@ using A17_Ex01_Logic;
 
 namespace A17_Ex01_UI
 {
-    public partial class ImageSearcher : UserControl
+    public partial class UserControlImageSearcher : UserControl
     {
         readonly List<Photo>        r_PhotosDisplayed = new List<Photo>();
         private ImageSearcherLogic  m_ImageSearcherLogicItem;
         User                        m_LoggedInUser;
 
-        public ImageSearcher(User i_LoggedUser)
+        public UserControlImageSearcher(User i_LoggedUser)
         {
             InitializeComponent();
             m_LoggedInUser = i_LoggedUser;
@@ -91,7 +91,7 @@ namespace A17_Ex01_UI
 
         private void buttonOpenSelectedPhoto_Click(object sender, EventArgs e)
         {
-            ImageReaction newImageReaction = new ImageReaction(r_PhotosDisplayed.ElementAt(listViewPhotoDisplay.SelectedIndices[0]));
+            FormImageReaction newImageReaction = new FormImageReaction(r_PhotosDisplayed.ElementAt(listViewPhotoDisplay.SelectedIndices[0]));
             newImageReaction.Show();
         }
 

@@ -16,7 +16,7 @@ namespace A17_Ex01_UI
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new AppHomepage());
+            Application.Run(new FormAppHomepage());
         }
     }
 }

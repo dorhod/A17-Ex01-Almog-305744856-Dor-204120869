@@ -1,6 +1,6 @@
 ﻿namespace A17_Ex01_UI
 {
-    partial class FilterWall
+    partial class UserControlFilterWall
     {
         /// <summary> 
         /// Required designer variable.

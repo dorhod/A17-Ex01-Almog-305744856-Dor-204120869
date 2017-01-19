@@ -48,10 +48,10 @@
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Facebook">
-      <HintPath>..\..\..\..\..\..\Desktop\01_FB01_BasicFacebookFeatures.V6.8.0.15\FBApi\Facebook.dll</HintPath>
+      <HintPath>..\Facebook.dll</HintPath>
     </Reference>
     <Reference Include="FbGraphApiWrapper">
-      <HintPath>..\..\..\..\..\..\Desktop\01_FB01_BasicFacebookFeatures.V6.8.0.15\FBApi\FbGraphApiWrapper.dll</HintPath>
+      <HintPath>..\FbGraphApiWrapper.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Windows.Forms" />

@@ -4,12 +4,12 @@ using A17_Ex01_Logic;
 
 namespace A17_Ex01_UI
 {
-    public partial class Post : UserControl
+    public partial class UserControlPost : UserControl
     {
         public int      LikeAmount { get; set; }
         private string  PostID { get; set; }
 
-        public Post(WallPost i_NewPost)
+        public UserControlPost(WallPost i_NewPost)
         {
             InitializeComponent();
 
