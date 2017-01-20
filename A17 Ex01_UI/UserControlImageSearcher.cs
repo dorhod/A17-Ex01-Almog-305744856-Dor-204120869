@@ -4,6 +4,7 @@ using System.Linq;
 using System.Windows.Forms;
 using FacebookWrapper.ObjectModel;
 using A17_Ex01_Logic;
+using System.Threading;
 
 namespace A17_Ex01_UI
 {
@@ -39,11 +40,32 @@ namespace A17_Ex01_UI
         private void showPhotos(List<Photo> i_Photolist)
         {
             r_PhotosDisplayed.Clear();
-            foreach (Photo photo in i_Photolist)
+
+            List<System.Drawing.Image> sy = new List<System.Drawing.Image>();
+
+            Thread featch = new Thread(() =>
             {
-                imageListFromUser.Images.Add(photo.ImageNormal);
-                r_PhotosDisplayed.Add(photo);
-            }
+                foreach (Photo photo in i_Photolist)
+                {
+                    Thread T = new Thread(() =>
+                    {
+                        System.Drawing.Image newPhoto = photo.ImageNormal;
+                        lock (this)
+                        {
+                            sy.Add(newPhoto);
+                        }
+
+                    });
+                    T.Start();
+
+                    r_PhotosDisplayed.Add(photo);
+                }
+            });
+
+            featch.Start();
+            featch.Join();
+
+            imageListFromUser.Images.AddRange(sy.ToArray()); 
 
             listViewPhotoDisplay.View = View.LargeIcon;
             listViewPhotoDisplay.LargeImageList = imageListFromUser;
@@ -54,25 +76,18 @@ namespace A17_Ex01_UI
                 item.ImageIndex = j;
                 this.listViewPhotoDisplay.Items.Add(item);
             }
-
             createListOfYears();
             createListOfUsers();
+
         }
 
         private void createListOfYears()
         {
             // Create a list of years that has photos
-            foreach (Photo photo in m_ImageSearcherLogicItem.m_AllPhotosList)
+            List<int> yearsOfPhotos = m_ImageSearcherLogicItem.m_PhotosByYearList.Keys.ToList();
+            foreach (int yearOfPhoto in yearsOfPhotos)
             {
-                int yearOfPhoto = photo.CreatedTime.GetValueOrDefault().Year;
-                if (m_ImageSearcherLogicItem.m_PhotosByYearList.ContainsKey(yearOfPhoto))
-                {
-                    if (!checkedListBoxYearOfPhoto.Items.Contains(yearOfPhoto))
-                    {
-                        checkedListBoxYearOfPhoto.Items.Add(yearOfPhoto);
-                    }             
-                }
-
+                checkedListBoxYearOfPhoto.Items.Add(yearOfPhoto);
             }
         }
 
