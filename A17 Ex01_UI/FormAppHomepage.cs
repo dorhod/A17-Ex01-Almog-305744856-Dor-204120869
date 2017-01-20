@@ -99,7 +99,7 @@ namespace A17_Ex01_UI
                 m_LoggedInUser = i_LoginResult.LoggedInUser;
                 AppSettings.GetSettings().LastAccessToken = i_LoginResult.AccessToken;
                 buttonLogin.Text = "Logout";
-                fetchUserInfo();
+                setUserInfo();
             }
             else
             {
@@ -107,23 +107,29 @@ namespace A17_Ex01_UI
             }
         }
 
-        private void fetchUserInfo()
+        private void setUserInfo()
         {
             Cursor = System.Windows.Forms.Cursors.AppStarting;
             pictureBoxProfilPicture.LoadAsync(m_LoggedInUser.PictureNormalURL);
-            //TabPage tabPagePhotos = new TabPage();
-            //addPage(tabPagePhotos);
-            
-            fetchUserFeed();
+
+            TabPage tabPagePhotos = createTabPage();
+            fetchUserPhotos(tabPagePhotos);
+
+            TabPage tabPageFeed = createTabPage();
+            fetchUserFeed(tabPageFeed);
 
             Cursor = System.Windows.Forms.Cursors.Default;
         }
 
-        private void fetchUserFeed()
+        private TabPage createTabPage()
         {
             TabPage tabPageFeed = new TabPage();
             addPage(tabPageFeed);
+            return tabPageFeed;
+        }
 
+        private void fetchUserFeed(TabPage tabPageFeed)
+        {
             tabPageFeed.Text = "Feed";
             UserControlFilterWall PageFeed = new UserControlFilterWall();
             tabPageFeed.Controls.Add(PageFeed);
@@ -131,10 +137,9 @@ namespace A17_Ex01_UI
             PageFeed.fetchPosts();
         }
 
-        private TabPage fetchUserPhotos(TabPage tabPagePhotos) { 
+        private void fetchUserPhotos(TabPage tabPagePhotos) { 
             tabPagePhotos.Text = "Photos";
             tabPagePhotos.Controls.Add(new UserControlImageSearcher(m_LoggedInUser));
-            return tabPagePhotos;
         }
 
 

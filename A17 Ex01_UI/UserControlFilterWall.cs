@@ -25,8 +25,6 @@ namespace A17_Ex01_UI
         {
             try
             {
-                Console.WriteLine("ok");
-
                 m_Posts = new List<WallPost>();
 
                 JsonObject results = (JsonObject)r_FbUser.Get("me/feed?fields=message,likes{name},comments{from},story,source,created_time,picture,from&limit=10000");
@@ -54,7 +52,7 @@ namespace A17_Ex01_UI
                 featch.Start();
                 featch.Join();
 
-                loadFeed();
+                fatchFeedOrderedByDate();
             }
             finally
             {
@@ -75,6 +73,12 @@ namespace A17_Ex01_UI
         {
             IEnumerable<WallPost> orderFeedByLikes = m_Posts.OrderByDescending(post => post.LikeCount);
             setFeed(orderFeedByLikes.ToList());
+        }
+
+        private void fatchFeedOrderedByDate()
+        {
+            IEnumerable<WallPost> orderFeedByTime = m_Posts.OrderByDescending(post => post.Time);
+            setFeed(orderFeedByTime.ToList());
         }
 
         private void comboBoxWallFilter_SelectedIndexChanged(object sender, EventArgs e)

@@ -16,6 +16,10 @@ namespace A17_Ex01_Logic
             PhotosOfUser.Add(i_PhotoOfUser);
         }
 
+        public User getUser (){
+            return TaggedUser;
+        }
+
         public void AddPhotoToUser(Photo i_Photo)
         {
             if (!IsPhotoExist(i_Photo))

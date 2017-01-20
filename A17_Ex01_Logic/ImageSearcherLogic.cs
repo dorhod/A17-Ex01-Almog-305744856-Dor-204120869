@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 using FacebookWrapper.ObjectModel;
+using System.Threading;
 
 namespace A17_Ex01_Logic
 {
@@ -27,6 +28,7 @@ namespace A17_Ex01_Logic
             {
                 addAllPhotos(album.Photos);
             }
+
             addAllPhotos(i_LoggedInUser.PhotosTaggedIn);
 
             return m_AllPhotosList;
@@ -42,14 +44,12 @@ namespace A17_Ex01_Logic
                 {
                     m_PhotosByYearList.Add(photo.CreatedTime.GetValueOrDefault().Year, new List<Photo>());
                 }
-            }
 
-            foreach (Photo photo in m_AllPhotosList)
-            {
-                // Create a list of photos and by the user tagged in it
-                createListOfPhotosByUser(photo);
                 // Create a list of photos by the year they were added
                 m_PhotosByYearList[photo.CreatedTime.GetValueOrDefault().Year].Add(photo);
+
+                Thread T = new Thread(() => createListOfPhotosByUser(photo));
+                T.Start();
             }
         }
 
@@ -62,17 +62,18 @@ namespace A17_Ex01_Logic
             {
                 foreach (PhotoTag photoTag in photoTags)
                 {
-                    indexOfTaggedUser = photosByUserListContains(photoTag.User.Name);
-
-                    if (indexOfTaggedUser != -1)
+                    lock (this)
                     {
-                        m_PhotosByUserList[indexOfTaggedUser].AddPhotoToUser(i_Photo);
+                        indexOfTaggedUser = photosByUserListContains(photoTag.User.Name);
+                        if (indexOfTaggedUser != -1)
+                        {
+                            m_PhotosByUserList[indexOfTaggedUser].AddPhotoToUser(i_Photo);
+                        }
+                        else
+                        {
+                            m_PhotosByUserList.Add(new UserWithPhotos(photoTag.User, i_Photo));
+                        }
                     }
-                    else
-                    {
-                        m_PhotosByUserList.Add(new UserWithPhotos(photoTag.User, i_Photo));
-                    }
-
                     // Add all tagged names to check box list
                     m_ListOfTaggedUsers.Add(photoTag);
                 }
